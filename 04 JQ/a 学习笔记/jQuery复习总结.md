@@ -6,7 +6,7 @@
 + 参考书：锋利的jQuery
 + 学习参考：http://www.w3school.com.cn/jquery/
 + 官网：http://jquery.com/
-+  <img src="" >
+
 
 ##2. jQuery的重点
 + 2.1 jQuery入口函数(全球都会)
