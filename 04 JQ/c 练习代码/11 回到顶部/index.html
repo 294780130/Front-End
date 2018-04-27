@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>05-jQuery- 回到顶部案例</title>
+	<style>
+		.bk-top-box {
+			position: fixed;
+			bottom: 40px;
+			right: 10px;
+			cursor: pointer;
+		}
+	</style>
+	<script src="jquery-1.11.3.js"></script>
+	<script>
+		$(function(){
+			$("#J-bk-top").on('click',function(){
+				$(window).scrollTop(0);
+				$(window).scrollLeft(0);
+			});
+
+			$("#J_Box").on('click','h1',function(){
+				//this  jQuery的事件响应方法中，this指向被点击的 dom对象
+				this.innerHTML += '-';
+
+				//dom对象转换成 jQuery对象
+				$(this).text($(this).text() + 1);
+			});
+		});
+	</script>
+</head>
+<body>
+	<div class="bk-top-box" id="J-bk-top">
+		<img src="imgs/bk-top3.jpg" height="44" width="44" alt="">
+	</div>
+
+	<!-- ctrl + shift + g  自动包裹标签 -->
+	 <div id="J_Box">
+	 	<h1>内容内容1</h1>
+	 	<h1>内容内容2</h1>
+	 	<h1>内容内容3</h1>
+	 	<h1>内容内容</h1>
+	 	<h1>内容内容</h1>
+	 	<h1>内容内容</h1>
+	 	<h1>内容内容</h1>
+	 	<h1>内容内容</h1>
+	 	<h1>内容内容</h1>
+	 	<h1>内容内容</h1>
+	 	<h1>内容内容</h1>
+	 	<h1>内容内容</h1>
+	 	<h1>内容内容</h1>
+	 	<h1>内容内容</h1>
+	 	<h1>内容内容</h1>
+	 	<h1>内容内容</h1>
+	 	<h1>内容内容</h1>
+	 	<h1>内容内容</h1>
+	 	<h1>内容内容</h1>
+	 	<h1>内容内容</h1>
+	 	<h1>内容内容</h1>
+	 	<h1>内容内容</h1>
+	 	<h1>内容内容</h1>
+	 	<h1>内容内容</h1>
+	 	<h1>内容内容</h1>
+	 	<h1>内容内容</h1>
+	 	<h1>内容内容</h1>
+	 	<h1>内容内容</h1>
+	 	<h1>内容内容</h1>
+	 	<h1>内容内容</h1>
+	 </div>
+</body>
+</html>

@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>02-jQuery-动态创建表格案例</title>
+	<script src="jquery-1.11.3.js"></script>
+	<style>
+		* { padding: 0; margin: 0; }
+		table {
+			border-collapse: collapse;
+			border-spacing: 0;
+			border: 1px solid #c0c0c0;
+		}
+
+		th,td {
+			border: 1px solid #d0d0d0;
+			color: #404060;
+			padding: 10px;
+		}
+
+		th {
+			background-color: #09c;
+			font: bold 16px "微软雅黑";
+			color: #fff;
+		}
+
+		td {
+			font: 14px "微软雅黑";
+		}
+		tbody tr {
+			background-color: #f0f0f0;
+		}
+		tbody tr:hover {
+			cursor: pointer;
+			background-color: #fafafa;
+		}
+	</style>
+	<script>
+		var data = [{
+			name: "小张",
+			url: "123456",
+			type: "201501班"
+		},{
+			name: "小李",
+			url: "154656",
+			type: "201502班"
+		},{
+			name: "小黄",
+			url: "789456",
+			type: "201503班"
+		}];
+
+		$(function(){
+			//第一种：动态创建表格的方式，使用拼接html的方式 （推荐）
+			// var html = "";
+			// for( var i = 0; i < data.length; i++ ) {
+			// 	html += "<tr>";
+			// 	html += 	"<td>" + data[i].name + "</td>"
+			// 	html += 	"<td>" + data[i].url + "</td>"
+			// 	html += 	"<td>" + data[i].type + "</td>"
+			// 	html += "</tr>";
+			// }
+			// $("#J_TbData").html(html);
+
+			//第二种： 动态创建表格的方式，使用动态创建dom对象的方式
+			//清空所有的子节点
+			$("#J_TbData").empty();
+
+			//自杀
+			// $("#J_TbData").remove();
+
+			for( var i = 0; i < data.length; i++ ) {
+				//动态创建一个tr行标签,并且转换成jQuery对象
+				var $trTemp = $("<tr></tr>");
+
+				//往行里面追加 td单元格
+				$trTemp.append("<td>"+ data[i].name +"</td>");
+				$trTemp.append("<td>"+ data[i].url +"</td>");
+				$trTemp.append("<td>"+ data[i].type +"</td>");
+				// $("#J_TbData").append($trTemp);
+				$trTemp.appendTo("#J_TbData");
+			}
+		});
+	</script>
+</head>
+<body>
+	<table>
+		<thead>
+			<tr>
+				<th>姓名</th>
+				<th>学号</th>
+				<th>班级</th>
+			</tr>
+		</thead>
+		<tbody id="J_TbData">
+		</tbody>
+	</table>
+</body>
+</html>

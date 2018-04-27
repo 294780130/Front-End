@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jQuery练习</title>
+	<script src="../jquery-1.11.1.min.js"></script>
+	<script>
+		$(function(){
+			$("ul li").on("mouseover",function(){
+				var $this = $(this);
+				var index = $this.index();
+				$this.addClass("active").siblings("li").removeClass("active");
+				$(".pic").eq(index).addClass("choosed").siblings(".pic").removeClass("choosed");
+			});
+		});
+	</script>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		.container{
+			width: 1000px;
+			height: 500px;
+			margin: 100px auto;
+		}
+		ul{
+			display: block;
+			width: 320px;
+			height: 36px;
+			border: 1px solid #ddd;
+			border-bottom: 0;
+		}
+		ul li{
+			position: relative;
+			list-style: none;
+			width: 80px;
+			height: 34px;
+			line-height: 34px;
+			border-top: 4px solid white;
+			float: left;
+			cursor: pointer;
+			text-align: center;
+		}
+		ul li span{
+			position: absolute;
+			right: 0;
+			top: 10px;
+			width: 1px;
+			height: 14px;
+			background-color: #ddd;
+		}
+		.pic{
+			width: 100%;
+			border: 1px solid #ddd;
+			display: none;
+		}
+		.pic a img{
+			width: 100%;
+		}
+		.active{
+			border-top: 4px solid red;
+		}
+		.choosed{
+			display: block;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<ul>
+			<li class="active">国际大牌<span></span></li>
+			<li>国妆名牌<span></span></li>
+			<li>清洁用品<span></span></li>
+			<li>男士精品</li>
+		</ul>
+		<div class="pic choosed">
+			<a href="#">
+				<img src="imgs/1.jpg">
+			</a>
+		</div>
+		<div class="pic">
+			<a href="#">
+				<img src="imgs/2.jpg">
+			</a>
+		</div>
+		<div class="pic">
+			<a href="#">
+				<img src="imgs/3.jpg">
+			</a>
+		</div>
+		<div class="pic">
+			<a href="#">
+				<img src="imgs/4.jpg">
+			</a>
+		</div>
+	</div>
+</body>
+</html>
