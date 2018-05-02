@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>测试</title>
+	<script type="text/javascript">
+	window.onload = function(){
+		var param = window.location.search;
+		if(param){
+			var flag = param.split('=');
+			if(flag[1] == 1){
+				document.getElementById('showInfo').innerHTML = '注册成功';
+			}
+		}
+	}
+	</script>
+</head>
+<body>
+	<div id="showInfo"></div>
+	<div>
+		<form action="./form.php" method="get">
+			用户名：<input type="text" name="username"><br>
+			密码：<input type="password" name="password"><br>
+			<input type="submit" value="提交">
+		</form>
+
+	</div>
+
+</body>
+</html>
