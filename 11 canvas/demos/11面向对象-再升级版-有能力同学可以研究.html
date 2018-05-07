@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset=utf-8>
+	<title>面向对象版本的精灵图</title>
+	<style>
+	#contener {
+		overflow: hidden;
+	}
+	</style>
+</head>
+<body>
+<canvas id="contener">Your Browser does not support Canvas, please upgrade</canvas>
+
+<script>
+var canvas = document.getElementById('contener');
+var ctx = canvas.getContext('2d');
+
+canvas.width = 600;
+canvas.height = 600;
+canvas.style.border = '1px solid red';
+
+//精灵类的构造函数
+function Sprite( option ) {
+	this._init( option );
+}
+
+//精灵的函数原型
+Sprite.prototype = {
+	constructor: Sprite,
+	_init: function( option ) {
+		//初始化所有的内部属性参数
+		this.x = option.x === 0 ? 0 : option.x || 100;//精灵图的坐标
+		this.y = option.y === 0 ? 0 : option.y || 100;
+		this.h = option.h === 0 ? 0 : option.h || 260 / 4; //精灵图切割的原始高
+		this.w = option.w === 0 ? 0 : option.w || 160 / 4;
+		this.originW = option.originW === 0 ? 0 : option.originW || 160 / 4;
+		this.originH = option.originH === 0 ? 0 : option.originH || 260 / 4;
+		this._dirIndex = 0;// 方向的索引
+		this.spriteImg = null; //精灵图dom对象
+		this.spriteImgSrc = option.spriteImgSrc;
+		this.fps = option.fps || 20; //帧率
+		this.speed = option.speed || 10;
+
+		this._isImgLoaded = false;
+		this.spriteImg = new Image();
+		this.spriteImg.src = this.spriteImgSrc;
+
+		var self = this;
+		this.spriteImg.onload = function() { //精灵图加载完成后，设置标志位
+			self._isImgLoaded = true;
+		};
+
+		this._frameIndex = 0;
+		this._passedTime = 0;
+	},
+	render: function() {
+		// 如果精灵图加载完成后，每隔一段时间进行绘制一次。
+		var self = this;
+		//每隔一段时间绘制 精灵
+		var sx = this._frameIndex * self.originW;//裁剪的x坐标
+		var sy = self._dirIndex * self.originH; //裁切的y坐标
+		//绘制当前的图片
+		ctx.drawImage(
+			  self.spriteImg
+			, sx
+			, sy
+			, self.originW
+			, self.originH
+			, self.x
+			, self.y
+			, self.w
+			, self.h
+		)
+		
+	},
+	changeDir: function( dir ) {
+		if( dir == 'up' ) {
+			this._dirIndex = 3;
+		} else if( dir == 'down' ) {
+			this._dirIndex = 0;
+		} else if( dir == 'left' ) {
+			this._dirIndex = 1;
+		} else if( dir == 'right' ) {
+			this._dirIndex = 2;
+		}
+	},
+	update: function( delatTime ) {  //delatTime 上一帧距现在的时间差，秒计
+		
+		this._passedTime += delatTime;
+		if( this._passedTime <  1 / this.fps ) {
+			return;
+		}
+		this._passedTime = 0;
+
+		//每一帧，刷新一下游戏
+		if( this._dirIndex == 0 ) {  //下
+			this.y = this.y + this.speed * delatTime;
+		}else if( this._dirIndex == 1 ) { // 左
+			this.x = this.x - this.speed * delatTime;
+		}else if( this._dirIndex == 2 ) { // 右
+			this.x = this.x + this.speed * delatTime;
+		}else if( this._dirIndex == 3 ) { //上
+			this.y = this.y - this.speed * delatTime;
+		}		
+
+		this._frameIndex +=1;
+		this._frameIndex %= 4;	
+	}
+};
+
+//游戏类
+function Game() {
+	this.init();
+}
+
+//游戏类的原型
+Game.prototype = {
+	constructor: Game,
+	init: function() {
+		this.gameObjects = [];
+		this._now = Date.now();
+	},
+	mainloop: function() {
+		this.update(); // 循环
+		this.render();
+
+		// var self = this;
+		// setTimeout(function() {
+		// 	self.mainloop();
+		// }, 1000/60);
+	},
+	update: function() {
+		var delatTime = (Date.now() - this._now) / 1000;
+		this._now = Date.now();
+		this.gameObjects.forEach(function( gameObj ) {
+			gameObj.update(delatTime);
+		});
+	},
+	render: function() {
+		ctx.clearRect( 0, 0, canvas.width, canvas.height );
+		this.gameObjects.forEach(function( gameObj ) {
+			gameObj.render();
+		});
+	}
+};
+
+//创建游戏类对象
+var game = new Game();
+
+//创建英雄
+var hero = new Sprite({
+	spriteImgSrc: 'imgs/gameImgs/DMMban.png',
+	x: 100,
+	y: 100,
+	w: 160/4,
+	h: 260/4,
+	originH: 260/4,
+	originW: 160/4,
+	fps: 4,
+	speed: 200
+});
+game.gameObjects.push( hero );
+
+
+//添加用户的按键操作，监听事件，处理精灵的方向
+addEventListener('keyup', function( e ){
+	if( e.keyCode == 37 ) {
+		//left
+		hero.changeDir( 'left' );
+	}
+
+	if( e.keyCode == 38 ) {
+		//left
+		hero.changeDir( 'up' );
+	}
+
+	if( e.keyCode == 39 ) {
+		//left
+		hero.changeDir( 'right' );
+	}
+
+	if( e.keyCode == 40 ) {
+		//left
+		hero.changeDir( 'down' );
+	}
+
+	e.preventDefault();
+});
+
+
+//此方法，可以让浏览器确定下一帧什么时候绘制性能更高，可以取代自己使用定时器
+//重绘游戏界面的方式。
+window.requestAnimFrame = (function(){
+  return  window.requestAnimationFrame       || 
+          window.webkitRequestAnimationFrame || 
+          window.mozRequestAnimationFrame    || 
+          window.oRequestAnimationFrame      || 
+          window.msRequestAnimationFrame     || 
+          function(/* function */ callback, /* DOMElement */ element){
+            window.setTimeout(callback, 1000 / 60);
+          };
+})();
+
+function RunMain() {
+	//启动游戏主循环
+	game.mainloop();
+	window.requestAnimFrame(RunMain);
+}
+
+RunMain();
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>29Konva进阶</title>
+	<style>
+		body {
+			padding: 0;
+			margin: 0;
+			background-color: #f0f0f0;
+			overflow: hidden;
+		}
+	</style>
+	<script src="bower_components/konva/konva.js"></script>
+</head>
+<body>
+	<div id="container"></div>
+	<script type="text/javascript">
+		var stage = new Konva.Stage({
+			container: 'container',
+			width: window.innerWidth,
+			height: window.innerHeight
+		});
+
+		var layer = new Konva.Layer();
+		stage.add(layer);
+
+		var rect = new Konva.Rect({
+			x: 10,
+			y: 10,
+			width: 100,
+			height: 100,
+			fill: 'red'
+		});
+		layer.add(rect);
+		layer.draw();
+
+		//to动画系统
+		rect.to({
+			x: 100,
+			y: 100,
+			// width: 300,
+			// height: 300,
+			opactity: .1,
+			duration: 3
+		});
+
+		//Animate动画系统
+		var animate = new Konva.Animation(function(frame) {
+			//frame默认有3个参数：
+			 var time = frame.time, // 动画执行的时间统计
+		         timeDiff = frame.timeDiff, // 距离上一帧的时间 
+	             frameRate = frame.frameRate; // 帧率（既1000毫秒内执行的次数）
+	        // console.log( 'time1:' + time );
+	        // console.log( 'timeDiff:' + timeDiff );
+	        // console.log( 'frameRate: ' + frameRate );
+		},layer);
+		animate.start();
+
+		var group2 = new Konva.Group({
+			x: 300,
+			y: 300
+		});
+
+		var rectPoint = new Konva.Rect({
+			x:0,
+			y: 0,
+			width: 2,
+			height: 2,
+			fill: 'red'
+		});
+		 var rect1 = new Konva.Rect({
+		    x: 0,
+		    y: 0,
+		    width: 100,
+		    height: 50,
+		    fill: 'green',
+		    strokeWidth: 3,
+		    stroke : 'black',
+		    offset: {
+		      x: 50,//偏移x： 让x向负方向移动
+		      y: 25// 偏移y： 让y向负方向移动
+		    },
+		    draggable: true
+	    });
+		 group2.add( rect1 );
+		 group2.add( rectPoint );
+
+
+		layer.add(group2);
+		layer.draw();
+		// rect1.to({
+		// 	duration:3,
+		// 	rotation: 180,
+		// 	yoyo: true
+		// });
+
+		//循环播放动画
+		var tween2 = new Konva.Tween({
+			node: rect1,
+			duration: 2,
+			rotation: 360,
+			easing: Konva.Easings.ElasticEaseInOutIn,
+			onFinish: function() {
+				this.reset();
+				this.play();
+				console.log('end');
+			}
+		});
+		tween2.play();
+		
+	</script>
+</body>
+</html>

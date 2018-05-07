@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>31Konva案例-五角星案例</title>
+	<style>
+		body {
+			padding: 0;
+			margin: 0;
+			background-color: #f0f0f0;
+			overflow: hidden;
+		}
+	</style>
+	<script src="bower_components/konva/konva.js"></script>
+</head>
+<body>
+	<div id="container"></div>
+	<script type="text/javascript">
+		var stage = new Konva.Stage({
+			container: 'container',
+			width: window.innerWidth,
+			height: window.innerHeight
+		});
+
+		var layer = new Konva.Layer();
+		stage.add(layer);
+		
+		var star = new Konva.Star({
+			x: 300,	//五角星中心点
+			y: 300,
+			numPoints: 5,	//角数
+			innerRadius: 40,	//内圆半径
+			outerRadius: 70,	//外圆半径
+			fill: "teal",
+			stroke: "red",
+			strokeWidth: 4,
+			// rotation: -90
+		});
+		layer.add(star);
+
+		//圆环
+		var ring = new Konva.Ring({
+			x: 500,	//圆环中心点
+			y: 200,
+			innerRadius: 40,	//内圆半径
+			outerRadius: 70,	//外圆半径
+			fill: "teal",
+			stroke: "red",
+			strokeWidth: 4
+		});
+		layer.add(ring);
+		layer.draw();
+		
+		//五角星循环转动
+		var loopTween = new Konva.Tween({
+			node: star,
+			rotation: 360,
+			duration: 2,
+			easing: Konva.Easings.Linear,
+			onFinish: function() {
+				// this === loopTween //true
+				this.reset();//重置动画
+				this.play(); //重新播放动画
+			}
+		});
+		loopTween.play();
+
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>22Canvas案例-画布之间的相互绘制</title>
+	</head>
+<body>
+
+	<div id="container">
+		<canvas id="cavsElem1">
+			你的浏览器不支持canvas，请升级浏览器
+		</canvas>
+		<canvas id="cavsElem2">
+			你的浏览器不支持canvas，请升级浏览器
+		</canvas>
+	</div>
+
+	<script>
+		(function(){
+			var canvas1 = document.querySelector('#cavsElem1');
+			var canvas2 = document.querySelector('#cavsElem2');
+			var ctx1 = canvas1.getContext('2d');
+			var ctx2 = canvas2.getContext('2d');
+
+			canvas1.width = 300;
+			canvas1.height = 300;
+			canvas1.style.border = "1px solid #000";
+  
+		    canvas2.width = 300;
+			canvas2.height = 300;
+			canvas2.style.border = "1px solid #000";
+
+			var gra = ctx1.createRadialGradient(30, 30, 3, 30, 35, 20);
+			gra.addColorStop(0, "teal");
+			gra.addColorStop(1, "red");
+			ctx1.fillStyle = gra;
+
+			ctx1.fillRect(20, 20, 40, 40);
+
+			ctx2.drawImage(canvas1, 10, 10);
+		}());
+
+		//canvas的常用优化技巧： 画布的相互绘制。
+		// (function(){
+		// 	var canvas = document.querySelector( '#cavsElem' );
+		// 	var ctx = canvas.getContext( '2d' );
+
+		// 	canvas.width = 600;
+		// 	canvas.height = 600;
+		// 	canvas.style.border = "1px solid #000";
+		// 	ctx.fillStyle = 'red';
+		// 	ctx.fillRect(50, 50, 100, 100);
+
+		// 	//动态创建canvas
+		// 	var canvas2 = document.createElement('canvas');
+		// 	canvas2.width = 600;
+		// 	canvas2.height = 600;
+
+		// 	var ctx2 = canvas2.getContext( '2d' );
+		// 	// document.body.appendChild(canvas2);
+		// 	ctx2.drawImage(canvas, 100, 100);
+		// 	ctx2.fillRect(0, 0, 40,40);
+		// 	var angle = 0;
+		// 	setInterval(function(){
+		// 		ctx2.save();
+		// 		ctx2.clearRect(0,0,canvas.width,canvas.height);
+		// 		ctx2.translate(300, 300);
+		// 		ctx2.rotate(angle*Math.PI/180);
+		// 		ctx2.scale(2, 2);
+		// 		ctx2.fillRect(-50, -50, 100, 100);
+		// 		ctx2.beginPath();
+		// 		ctx2.moveTo(0,0);
+		// 		ctx2.lineTo(300,0);
+		// 		ctx2.moveTo(0, 0);
+		// 		ctx2.lineTo(0, 400);
+		// 		ctx2.stroke();
+		// 		ctx2.restore();
+		// 		angle+=3;
+		// 	}, 30);
+
+		// 	setInterval(function(){
+		// 		ctx.clearRect(0,0,canvas.width,canvas.height);
+		// 		ctx.drawImage(canvas2, 0, 0);
+		// 	},200)
+		}());
+	</script>
+</body>
+</html>
