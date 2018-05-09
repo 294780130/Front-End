@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div></div>
+</body>
+</html>
+<script src='../itcast.js'></script>
+<script>
+    var cache = {
+        data:[],
+        get:function(key){
+            console.log('111')
+            var value = null;
+            console.log(this.data)
+            for(var i= 0,len=this.data.length;i<len; i++){
+                var item = this.data[i]
+                if (key == item.key) {
+                    value = item.value;
+                }
+            }
+            console.log('get'+value)
+            return value;
+        },
+        add:function(key,value){
+            var json= { key: key, value: value};
+            this.data.push(json);
+        },
+        delete:function(key){
+            var status = false;
+            for(var i= 0,len=this.data.length;i<len; i++){
+                var item = this.data[i]
+                // 循环数组元素
+                if (item.key.trim() == key) {
+                    this.data.splice(i, 1);//开始位置,删除个数
+                    status = true;
+                    break;
+                }
+            }
+            return status;
+        },
+        update:function(key,value){
+            var status = false;
+            // 循环数组元素
+            for(var i= 0,len=this.data.length;i<len; i++){
+                var item = this.data[i]
+                if (item.key.trim() === key.trim()) {
+                    item.value = value.trim();
+                    status = true;
+                    break;
+                }
+            }
+            return status;
+        },
+        isExist:function(key){
+            for(var i= 0,len=this.data.length;i<len; i++){
+                var item = this.data[i]
+                if (key === item.key) {
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+        }
+    }
+    cache.add('nav','传智播客')
+    cache.add('tab','笑傲江湖')
+    console.log(cache.get('nav'))
+    console.log(cache.get('tab'))
+    cache.update('nav','黑马程序员')
+    console.log(cache.get('nav'))
+
+
+    //json和字符串转换
+    var json = {key:1,value:1}
+    var sjson = $$.sjson(json)
+    console.log($$.json(json))
+    console.log(sjson)
+</script>

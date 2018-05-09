@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<button id="btn">按钮</button>
+<p></p>
+</body>
+<script src='itcast.js'></script>
+<script type="text/javascript">
+
+    //测试
+    $$.event.on('btn', 'click', function(){
+        document.getElementsByTagName('p')[0].innerHTML = '成功绑定了事件'
+    });
+</script>
+</html>

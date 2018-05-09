@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>脚本之家</title>
+    <style type="text/css">
+        table{
+            width:300px;
+            height:60px;
+            background-color:green;
+        }
+        table td{
+            background-color:white;
+        }
+    </style>
+    <script src='itcast.js'></script>
+</head>
+<body>
+<button id="div">传智播客</button>
+<table cellspacing="1" id='table'>
+    <tr>
+        <td>单元格</td>
+        <td>单元格</td>
+        <td>单元格</td>
+        <td>单元格</td>
+        <td>单元格</td>
+    </tr>
+    <tr>
+        <td>单元格</td>
+        <td>单元格</td>
+        <td>单元格</td>
+        <td>单元格</td>
+        <td>单元格</td>
+    </tr>
+</table>
+</body>
+</html>
+
+<script>
+    /**
+     @para parentId 包裹容器的id
+     @para selector 容器内元素的选择器，支持id和className
+     @para fn 元素上要执行的函数
+     */
+    function delegate(pid, eventType, selector, fn) {
+        //参数处理
+        var parent = $$.$id(pid);
+        function handle(e){
+            var target = $$.GetTarget(e);
+            console.log(target.nodeName)
+            if(target.nodeName.toLowerCase()=== selector || target.id === selector || target.className.indexOf(selector) != -1){
+                // 在事件冒泡的时候，回以此遍历每个子孙后代，如果找到对应的元素，则执行如下函数
+                // 为什么使用call，因为call可以改变this指向
+                // 大家还记得，函数中的this默认指向window，而我们希望指向当前dom元素本身
+                fn.call(target);
+            }
+        }
+        //当我们给父亲元素绑定一个事件，他的执行顺序：先捕获到目标元素，然后事件再冒泡
+        //这里是是给元素对象绑定一个事件
+        parent[eventType]=handle;
+    }
+
+    delegate('table','onclick','td',function(){
+        this.style.color='white'
+        this.style.background='red'
+    })
+</script>

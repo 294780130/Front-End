@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script src="aop.js"></script>
+</head>
+
+<body>
+</body>
+</html>
+<script>
+	var  fun = function(para)
+	{
+		alert(para.name);
+		alert(para.sex);
+	}
+	//fun({id:'123',name:'shukui',pass:'123456'});
+	
+	
+	
+	var funNew = fun.before(function(para){
+			para.sex = "男";
+			
+		});
+   funNew({id:'123',name:'shukui',pass:'123456'});
+   
+   
+   
+   var ajax = function(type,url,para)
+   {
+	   alert('ajax代码');
+	   alert(para.other);
+   }
+   
+   //ajax('get','http://www.sina.com/1.php',{name:'1',pass:'1'});
+   
+   
+   //假如500年后，我通过月光宝盒回到500年前，恰巧让你负责修改这段代码。。。
+   //500年了，花儿都凋谢了。。。。我还要读懂别人的代码。。。。累死。。。。
+   //直接利用AOP修改
+   
+   ajax = ajax.before(function(type,url,para){
+	   	
+	   para.other = '123';
+	   
+	   });
+	
+	   
+  ajax('get','http://www.sina.com/1.php',{name:'1',pass:'1'});
+  
+  //好处 接口不变 修改容易
+</script>

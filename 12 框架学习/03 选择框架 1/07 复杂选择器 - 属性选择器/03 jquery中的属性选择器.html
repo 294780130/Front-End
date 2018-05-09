@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<p name='test' id='game'>大话西游</p>
+
+<p title='game'>大话西游</p>
+
+<p name='game'>大话西游</p>
+
+<p name='test' title='game'>大话西游</p>
+<p name='test' title="传智播客XXXXXXXXXXXXXXXX">大话西游</p>
+<p name='test' title="XXXXXXXXXXXXXXXX传智播客">大话西游</p>
+
+<p name='XXX大话西游' data='game'>大话西游</p>
+</body>
+</html>
+<script src='jquery-1.11.2.min.js'></script>
+<script>
+    $("p[id]").html('四大名著') //普通的属性选择器
+    $("p[title='game']").html('四大名著') //属性带值的选择器
+    $("p[name!='test']").html('四大名著') //属性不等于某值的选择器
+
+    $("p[title^='传智播客']").html('四大名著')  //CSS3以XX开头
+    $("p[title*='传智播客']").html('四大名著')  //CSS3包含XXX
+    $("p[title$='传智播客']").html('四大名著')  //CSS3中以XX结尾
+
+
+    //以上组合选择
+    $("p[data][name$='大话西游']").html('四大名著')  //选择包含data属性并且name属性以大话西游字符串结尾
+</script>

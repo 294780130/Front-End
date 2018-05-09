@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<style type="text/css">
+    span{
+        height:300px;
+        width:300px;
+        background:#F00;
+        margin: 10px;
+    }
+</style>
+<body>
+<div id='mydiv'>
+    <span class='span'>点击我变成蓝色</span>
+    <span class='span'>点击我变成蓝色</span>
+    <span class='span'>点击我变成蓝色</span>
+    <span class='span'>点击我变成蓝色</span>
+</div>
+</body>
+<script src='itcast.js'></script>
+<script type="text/javascript">
+
+    var spans =$class('mydiv','span');
+    for(var i=0;i<spans.length;i++) {
+        spans[i].onclick = function(){
+           this.style.background='yellow';
+        }
+    }
+
+    function $class(context,className) {
+        var dom = getDOM(context)
+        var elements = getElements(dom,className)
+        return elements;
+        /*隔离法则*/
+        function getDOM(context){
+            var dom;
+            //如果传递过来的是字符串 ，则转化成元素对象
+            if($$.isString(context)){
+                dom = document.getElementById(context);
+            }else{
+                dom = document;
+            }
+            return dom;
+        }
+       function getElements(dom,className) {
+           var elements;
+           /*如果兼容getElementsByClassName*/
+           if(dom.getElementsByClassName) {
+               elements = dom.getElementsByClassName(className);
+           }else{
+               //如果浏览器不支持
+               dom = dom.getElementsByTagName('*');
+               for(var i,len=dom.length;i<len;i++) {
+                   if(dom[i].className) {
+                       elements.push(dom[i]);
+                   }
+               }
+           }
+           return elements;
+       }
+    }
+    //class选择器  最终版
+    function $class2(context,className){
+        var elements;
+        var dom;
+        //如果传递过来的是字符串 ，则转化成元素对象
+        if($$.isString(context)){
+            context = document.getElementById(context);
+        }
+        //如果兼容getElementsByClassName
+        if(context.getElementsByClassName){
+            return context.getElementsByClassName(className);
+        }else{
+            //如果浏览器不支持
+            dom = context.getElementsByTagName('*');
+            for(var i,len=dom.length;i<len;i++) {
+                if(dom[i].className && dom[i].className ==className ) {
+                    elements.push(dom[i]);
+                }
+            }
+        }
+        return elements;
+    }
+</script>
+</html>

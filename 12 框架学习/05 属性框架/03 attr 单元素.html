@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<style type="text/css">
+    *{padding: 10px;}
+    div{
+        color:red;
+        font-size:50px;
+    }
+    .div{
+        color:blue;
+        font-size:50px;
+    }
+</style>
+<body>
+<div id="container">
+    传智播客
+</div>
+<button id="mybtn">按钮</button>
+</body>
+</html>
+<script src='itcast.js'></script>
+<script type="text/javascript">
+
+    $$.$id('mybtn').onclick = function(){
+        attr('container','name','hello');
+        attr('container','class','div');
+    }
+
+    //属性操作，获取属性的值，设置属性的值 at tr（'test','target','_blank'）
+    /*利用arguments实现重载*/
+    function attr(id, key, value){
+        var dom =  $$.$id(id);
+        if(value){
+            dom.setAttribute(key, value);
+        }else{
+            return dom.getAttribute(key);
+        }
+    }
+
+</script>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div id='div'>111111</div>
+</body>
+</html>
+<script>
+//tap('div',function(e){
+//    console.log(e)
+//})
+longTap('div',function(e){
+    console.log('长按事件')
+    console.log(e)
+})
+
+    function tap(id,callback){
+        var element = document.getElementById(id)
+        var startTx, startTy;
+
+        element.addEventListener( 'touchstart', function( e ){
+            var touches = e.touches[0];
+
+            startTx = touches.clientX;
+            startTy = touches.clientY;
+        }, false );
+
+        element.addEventListener( 'touchend', function( e ){
+            var touches = e.changedTouches[0],
+                    endTx = touches.clientX,
+                    endTy = touches.clientY;
+
+            // 在部分设备上 touch 事件比较灵敏，导致按下和松开手指时的事件坐标会出现一点点变化
+            if( Math.abs(startTx - endTx) < 6 && Math.abs(startTy - endTy) < 6 ){
+                console.log( 'fire tap event' );
+            }
+            callback(e)
+        }, false );
+    }
+
+    function longTap(id,callback){
+        var starttx, startty, ltaptimer;
+        var element = document.getElementById(id)
+        element.addEventListener( 'touchstart', function( e ){
+            if( ltaptimer ){
+                clearTimeout( ltaptimer );
+                ltaptimer = null;
+            }
+            var touches = e.touches[0];
+            starttx = touches.clientX;
+            startty = touches.clientY;
+            ltaptimer = setTimeout(function(){
+                console.log( 'fire long tap event' );
+            }, 1000 );
+            e.preventDefault();
+        }, false );
+        element.addEventListener( 'touchmove', function( e ){
+            var touches = e.touches[0],
+                    endtx = touches.clientX,
+                    endty = touches.clientY;
+            if( ltaptimer && (Math.abs(endtx - starttx) > 5 || Math.abs(endty - startty) > 5) ){
+                clearTimeout( ltaptimer );
+                ltaptimer = null;
+            }
+        }, false );
+        element.addEventListener( 'touchend', function( e ){
+            if( ltaptimer ){
+                clearTimeout( ltaptimer );
+                ltaptimer = null;
+                callback(e)
+            }
+        }, false );
+    }
+</script>

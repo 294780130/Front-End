@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style type="text/css">
+	span{
+		height:300px;
+		width:300px;
+		background:#F00;
+		margin: 10px;
+	}
+</style>
+<body>
+<div id='mydiv'>
+	<span class='span'>点击我变成蓝色</span>
+	<span class='span'>点击我变成蓝色</span>
+	<span class='span'>点击我变成蓝色</span>
+	<span class='span'>点击我变成蓝色</span>
+</div>
+</body>
+<script type="text/javascript">
+	//    检测document是否支持某属性，其实就是判断这个对象中是否有这个属性或者方法
+	function $class(name){
+		if(document.getElementsByClassName(name)) {
+			//这里的意思就是如果document没有找到这个属性则返回null  -- 可结合原型链理解  null--》false
+			alert('开始');
+			return document.testdd;
+			alert('结束');
+		}else{
+            alert('开始');
+            return 0;
+            alert('结束');
+        }
+	}
+
+	$class();
+</script>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        div{
+            height:400px;
+            width:500px;
+            background:green;
+            padding:40px;
+            position: absolute;
+        }
+        #child{
+            height:200px;
+            width:200px;
+            background:yellow;
+            margin: 100px;
+            position: absolute;
+        }
+        #grandson{
+            height:50px;
+            width:50px;
+            background:red;
+            margin: 30px;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<div id="div">
+    <div id="child">
+        <div id="grandson"></div>
+    </div>
+</div>
+
+
+</body>
+</html>
+<script src=../jquery-1.11.2.min.js></script>
+
+<script>
+    $("#elem").offset().top
+    $("#elem").offset().left
+//    相对父元素的位置坐标：
+    $("#elem").position().top
+    $("#elem").position().left
+</script>

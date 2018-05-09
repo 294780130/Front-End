@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style type="text/css">
+	span{
+		height:300px;
+		width:300px;
+		background:#F00;
+		margin: 10px;
+	}
+</style>
+<body>
+<div id='mydiv'>
+	<span class='span'>点击我变成蓝色</span>
+	<span class='span'>点击我变成蓝色</span>
+	<span class='span'>点击我变成蓝色</span>
+	<span class='span'>点击我变成蓝色</span>
+</div>
+</body>
+<script type="text/javascript">
+	var spans =$class('span');
+	for(var i=0;i<spans.length;i++) {
+		spans[i].onclick = function(){
+			this.style.background='yellow';
+		}
+	}
+	/*缩小搜索范围*/
+	function $class(name) {
+		// 首先大海捞针 ---放在集合里面
+		//遍历集合--依次比较 判断是否等于class
+		 var i=0,len,arr=[];
+		 var dom = document.getElementsByTagName('*');
+		 for(i;len=dom.length,i<len;i++) {
+			 if(dom[i].className ==name) {
+				 // array放在一个集合里面
+				 arr.push(dom[i]);
+			 }
+		 }
+		 return arr;
+	} 
+
+
+//	1 宏观注释
+//	2 分步走
+//	3 思考用哪个数据结构 -- 变量 数组 二维数组 json（字典）
+
+</script>
+</html>

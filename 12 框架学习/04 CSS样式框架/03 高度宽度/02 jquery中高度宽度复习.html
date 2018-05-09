@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<button id="btn1">设置宽度为500</button>
+<button id="btn2">设置高度为10em/button>
+<button id="btn3">设置高度为200pt</button>
+
+
+<div style="height:100px;border:1px solid blue;background-color:lightblue;"></div><br>
+</body>
+</html>
+<script src='../jquery-1.11.2.min.js'></script>
+<script>
+    $(document).ready(function(){
+        //获取
+        var docWidth = $(document).width();
+
+        var docHeight = $(document).height();
+
+        //移动开发可视区域
+        var viewportWidth = $(window).width();
+        var viewportHeight = $(window).height();
+
+//设置
+        $("#btn1").click(function(){
+            $("div").height(500);
+        });
+        $("#btn2").click(function(){
+            $("div").height("10em");
+        });
+        $("#btn3").click(function(){
+            $("div").height("200pt");
+        });
+    });
+</script>

@@ -1,0 +1,48 @@
+
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        div{
+            color:red;
+            font-size:40px;
+        }
+    </style>
+</head>
+<body>
+<div id='div'>笑傲江湖</div>
+<input type="input" id="input"/>
+<button id="btn">button</button>
+</body>
+</html>
+<script src='itcast.js'></script>
+<script>
+    var dom = $$.$id('div')
+    var input = $$.$id('input')
+    $$.on('btn','click',function(){
+        //获取内容
+//        dom.innerHTML='111'
+        html('#div','传智播客')
+        //获取表单控件内容
+        input.value='111'
+    })
+    console.log(html('#div'))
+
+    //innerHTML的函数版本
+    /*利用arguments实现重载*/
+    function html(context, value){
+        var doms = $$.$all(context);
+        //设置
+        if(value){
+            for(var i= 0,len= doms.length; i<len; i++){
+                doms[i].innerHTML = value;
+            }
+        }else{
+            return doms[0].innerHTML
+        }
+
+    }
+</script>

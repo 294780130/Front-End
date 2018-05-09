@@ -1,0 +1,29 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <style type="text/css">
+        *{height: 50px; padding: 10px; margin: 10px;}
+        body{padding: 0;}
+    </style>
+</head>
+
+<body>
+<h3>h3</h3>
+<div  class='moshou'>魔兽世界</div>
+
+<div class="hero">英雄联盟</div>
+
+<div id="dream">梦幻西游</div>
+</body>
+</html>
+<script src='itcast.js'></script>
+<script>
+    var dom = $$.$group('.moshou,.hero,#dream,h3');
+    for(var i = 0, len1 = dom.length; i < len1; i++){
+        dom[i].style.border = '1px solid red';
+    }
+
+</script>

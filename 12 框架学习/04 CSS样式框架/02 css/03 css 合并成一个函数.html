@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        p{
+            background:red;
+            font-size:40px;
+            color:yellow;
+        }
+        .add{
+            color:blue;
+            font-size:100px;
+        }
+        .hide{
+            display:none
+        }
+    </style>
+</head>
+<style type="text/css">
+    *{padding: 10px;}
+</style>
+<body>
+<p>英雄联盟</p>
+<p>梦幻西游</p>
+<script src='../itcast.js'></script>
+<script type="text/javascript">
+
+    //设置元素的样式属性 css（'test'，'color','red'）；
+    //该函数包含两个功能：
+    // 1获取id为id元素的样式值 比如 高度 100 透明度0.5 宽度30，
+    // 2如果value不为空则表示设置样式的值，比如高度100
+
+
+    /*重载 -- 根据arguments参数个数*/
+     function css(id, key, value){
+        var dom = $$.isString( id)?$$.$id(id) : id;
+        if(dom.length){
+            //先骨架骨架 -- 如果是设置模式 -- 如果是设置模式
+            if(value){
+                //如果是获取模式
+            }
+            }else{
+                //如果是设置模式
+            }
+    }
+</script>
+</body>
+</html>

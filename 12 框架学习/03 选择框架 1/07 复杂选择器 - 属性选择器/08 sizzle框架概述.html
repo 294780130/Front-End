@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div id='div'>nihao</div>
+</body>
+</html>
+<script src='sizzle.js'></script>
+<script>
+//    sizzle框架复杂点：考虑了浏览器兼容性，支持xml，各种细节
+    var divs = Sizzle('#div');
+    divs[0].innerHTML = '魔兽世界'
+</script>

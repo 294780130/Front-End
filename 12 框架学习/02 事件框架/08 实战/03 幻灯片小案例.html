@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>图片专场</title>
+</head>
+<style type="text/css">
+*{margin: 0;padding: 0;list-style: none;}
+#container{width: 670px;height: 240px;background: url(img/1.jpg) no-repeat; margin: 100px auto; position: relative;}
+ul{position: absolute; bottom: 0; left: 520px; width: 120px; height: 30px;}
+li{width: 16px; height: 16px; border-radius: 8px; margin-left: 8px; float: left; background: rgba(255,255,255,0.6); cursor: pointer;}
+.choose{background: rgba(255,0,255,0.6);}
+</style>
+<body>
+<div id="container">
+	<ul>
+		<li id="li_1" class="choose"></li>
+		<li id="li_2"></li>
+		<li id="li_3"></li>
+		<li id="li_4"></li>
+		<li id="li_5"></li>
+	</ul>
+</div>	
+</body>
+<script type="text/javascript" src="itcast.js"></script>
+<script type="text/javascript">
+
+	//	给每个元素绑定鼠标悬浮事件 --更换图片
+function addAnimate(num){
+	$$.mouseover('li_' + num, function(){
+		//鼠标悬浮的时候 1，切换图片
+        $$.css('container', 'background', 'url(img/' + num + '.jpg) no-repeat');
+		//2，下面的导航球变色
+        // 排他思想
+		for(var i = 1; i < 6; i++){
+            $$.$id('li_' + i).className = '';
+		}
+        $$.$id('li_' + num).className = 'choose';
+	})
+}
+for(var i = 1; i < 6; i++){
+	addAnimate(i);
+}
+
+
+
+</script>
+</html>

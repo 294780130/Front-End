@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+
+    <style>
+        *{
+            list-style-type:none;
+        }
+        .demo {
+            border: 1px solid #ccc;
+            padding: 10px;
+            height:100px;
+        }
+
+        li {
+            float: left;
+            height: 50px;
+            line-height: 50px;
+            width: 50px;
+            -moz-border-radius: 10px;
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+            text-align: center;
+            background: #f36;
+            color: green;
+            margin-right: 5px;
+        }
+        /*群组选择器*/
+        .first, .last {background: green;color: yellow; border: 1px solid #ccc;}
+    </style>
+</head>
+<body>
+<div class="demo">
+    <ul>
+        <li id="first" class="first">1</li>
+        <li class="active important">2</li>
+        <li class="important items">3</li>
+        <li class="important">4</li>
+        <li class="items">5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+        <li id="last" class="last">10</li>
+    </ul>
+</div>
+</body>
+</html>

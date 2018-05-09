@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<style type="text/css">
+    *{padding: 10px;}
+    div{
+        color:red;
+        font-size:50px;
+    }
+    .div{
+        color:blue;
+        font-size:50px;
+    }
+</style>
+<body>
+<div class="container">传智播客</div>
+<div class="container">传智播客</div>
+<div class="container">传智播客</div>
+<div class="container">传智播客</div>
+<div class="container">传智播客</div>
+<button id="mybtn">按钮</button>
+</body>
+</html>
+<script src='itcast.js'></script>
+<script type="text/javascript">
+
+    $$.$id('mybtn').onclick = function(){
+        $$.attr('.container','name','hello');
+        $$.attr('.container','class','div');
+    }
+
+
+
+</script>
+

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<style type="text/css">
+    span{
+        height:300px;
+        width:300px;
+        background:#F00;
+        margin: 10px;
+    }
+</style>
+<body>
+<div id='mydiv'>
+    <span class='span'>点击我变成蓝色</span>
+    <span class='span'>点击我变成蓝色</span>
+    <span class='span'>点击我变成蓝色</span>
+    <span class='span'>点击我变成蓝色</span>
+</div>
+</body>
+<script src='itcast.js'></script>
+<script type="text/javascript">
+
+    var spans =$$.$class('mydiv','span');
+    for(var i=0;i<spans.length;i++) {
+        spans[i].onclick = function(){
+            this.style.background='yellow';
+        }
+    }
+</script>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        p{
+            background:red;
+            font-size:40px;
+        }
+    </style>
+</head>
+<body>
+<div id="container">
+    <p>英雄联盟</p>
+    <p>梦幻西游</p>
+</div>
+</body>
+</html>
+<script src='itcast.js'></script>
+<script>
+    var dom = $$.$all('p')
+    dom[0].style.color='yellow'
+
+
+
+    //封装起来
+    function setStyle(dom,key,value){
+        dom.style[key] = value;
+    }
+    setStyle(dom[0],'color','green')
+    setStyle(dom[0],'opacity','0.5')
+
+
+    //获取样式值
+    console.log(dom[0].style.color)//color是通过style方式添加上去的，可以通过style.color获取
+    console.log(dom[0].style.background)//background是通过class方式添加上去的，获取不到
+
+
+
+    //解决方案 -- js中提供了全局的getComputedStyle函数
+    console.log(window.getComputedStyle(dom[0],null).color)
+    //IE早期浏览器不支持
+    //console.log(dom[0].currentStyle['color'])
+
+
+    //封装成一个函数
+    function getStyle(dom,key){
+        if(dom.currentStyle){
+            return dom.currentStyle[key];
+        }else{
+            return getComputedStyle(dom,null)[key];
+        }
+    }
+    //测试
+    console.log(getStyle(dom[0],'color'))
+    console.log(getStyle(dom[0],'height'))
+
+
+</script>

@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+ div{height:2000px;width:2000px;background:red}
+</style>
+</head>
+
+<body>
+<div id='div'></div>
+</body>
+</html>
+<script>
+ //document.body.scrollWidth
+//滚动条的总宽度
+//document.body.scrollHeight
+//滚动条的总高度
+//window.scrollY 
+//标准浏览器中实现获取滚动条距顶部高度
+//document.documentElement.scrollTop 
+//IE浏览器中获取滚动条距顶部高度
+ var div = document.getElementById('div');
+ div.onclick=function()
+ {
+	 alert("滚动条总宽度:"+document.body.scrollWidth);
+     alert("滚动条总高度:"+document.body.scrollHeight);
+     alert("滚动条距离顶部高度:"+window.scrollY );
+	 alert("滚动条距离左边高度:"+window.scrollX );  
+ }
+ 
+
+
+</script>

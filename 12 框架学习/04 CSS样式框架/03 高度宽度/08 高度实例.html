@@ -1,0 +1,76 @@
+<!DOCTYPE html >
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <title>无标题文档</title>
+    <style>
+        .piczhanshi{width:976px;height:167px;border:1px #999999 solid;margin:0 auto;}
+        h3{
+            float:left;
+            background-color: #DDD;
+            float: left;
+            height: 35px;
+            width: 966px;
+            margin-top: 2px;
+            line-height: 35px;
+            text-align: center;
+            color: #064278;
+            font-size: 18px;
+            margin-left: 5px;
+            margin-right: 5px;
+            margin-bottom: 10px;
+        }
+        .tupian{
+            float:left;
+            width:966px;
+            height:120px;
+            margin-left:5px;margin-right:5px;
+        }
+        .demo{width:966px;height:110px;overflow:hidden;margin-top:5px;margin-bottom:5px;} / /这个是scrollLeft作用的层，实现移动效果的是他的子级divindexmo
+                                                                                             #indemo{width:800%;height:110px;} //这里的宽度为他的父级div层的8倍宽
+                                                                                                                                 .demo1,.demo2{float:left;}
+    </style>
+</head>
+<body>
+<div id="piczhanshi" class="piczhanshi">
+    <h3>鸟巢效果图</h3>
+    <div id="tupian" class="tupian">/ /这里是包含图片的最外层div是为了定位而设置的与滚动没关系
+        <div id="demo" class="demo">   // 这里是包含图片的div，也就是需要实现子级div滚动的层（scrollLeft是相对于当前层的子层的），这里必须这是好宽高已经overflow：hidden
+            <div id="indemo">   //这个是需要滚动的图片包含层，他的宽度在图片左右滚动效果下，比他的父级div的宽大，这里设置为800%，也就是相当他的父级div来说，他等于父级div宽的8倍
+                <div id="demo1" class="demo1"> //这里是包含图片的层，通过“float”和demo2实现无缝连接
+                    <img src="image/niaochao1.jpg" />
+                    <img src="image/niaochao2.jpg" />
+                    <img src="image/niaochao3.jpg" />
+                    <img src="image/niaochao4.jpg" />
+                    <img src="image/niaochao5.jpg" />
+                    <img src="image/niaochao6.jpg" />
+                    <img src="image/niaochao7.jpg" />
+                    <img src="image/niaochao8.jpg" />
+                    <img src="image/niaochao9.jpg" />
+
+                </div>
+                <div id="demo2" class="demo2"></div> //这里通过js代码“ tab2.innerHTML=tab1.innerHTML;”得到demo1的值， 通过“float”和demo1实现无缝连接
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+
+<script language="javascript">
+    var speed=20;
+    var tab=document.getElementById("demo");
+    var tab1=document.getElementById("demo1");
+    var tab2=document.getElementById("demo2");
+    tab2.innerHTML=tab1.innerHTML; //通过赋值获得tab1的值
+    function marquee(){
+        if(tab2.offsetWidth-tab.scrollLeft<=0) //当tab的移动宽度大于等于demo1的时候，scrollLeft为0，也就是恢复到未移动前的情况，继续移动
+        {tab.scrollLeft=0}
+        else
+        {tab.scrollLeft++;} //图片层不断的往left移动
+    }
+    var timer=setInterval(marquee,speed); //定时器
+    tab.onmouseover =function(){clearInterval(timer)}; //鼠标经过容器的时候清除定时器
+    tab.onmouseout =function(){timer=setInterval(marquee,speed);} //鼠标移开容器的时候开始定时器
+</script>   

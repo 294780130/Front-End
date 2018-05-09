@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script src='aop.js'></script>
+</head>
+
+<body>
+</body>
+</html>
+<script>
+
+//模拟一个复杂函数 需要执行很多时间
+function sleep(time) {
+  var now = +new Date();
+  while(true) {
+    if(+new Date() - now > time) {
+      break;
+    }
+  }
+}
+
+
+//模拟一个复杂函数 
+function Func1() {
+	sleep(1000);
+ //执行3秒
+}
+function Func2() {
+ //执行3秒
+ sleep(1000);
+}
+function Func3() {
+ //执行3秒
+ sleep(3000);
+}
+function Func4() {
+ //执行3秒
+ sleep(3000);
+}
+function Func5() {
+ //执行3秒
+ sleep(3000);
+}
+
+
+
+//突然客户/经理发话了，需要能够统计每个函数在不同的客户端执行的时间
+//然后程序员修改如下功能
+
+
+
+
+//统计函数运行时间
+function Func6() {
+  //计算时间的代码
+  var now = +new Date();
+   //代码
+   sleep(1000);
+   //计算时间的代码
+   var time = +new Date() -  now;
+   alert(time);
+}
+
+//修改好了之后，经理觉得功能挺好的，你把所有的函数都统计下时间。。。
+//程序员又将所有的函数都修改了一遍。。。。
+
+
+Func6();
+
+
+//需要将所有的函数都需要添加类似的功能
+
+//突然有一天，经理说，不需要统计时间了，都去掉吧，，，，，
+//程序员：fuck you ~~~~
+
+
+
+//面向方面编程  可插拔编程
+
+//将时间记录函数封装一下
+function logTime (func) {
+	//相当于重新包装func，在前面植入一些代码，在后面又植入一些代码
+	//这里： 1 在前面植入：当前时间
+	        //2 函数后面植入统计函数执行事件代码
+  return func = (function() {
+    var d;
+    return func.before(function() {
+      d = +new Date();
+    }).after(function() {
+      alert(new Date() - d);
+    });
+  })()
+}
+
+//像年轮一样将业务函数包裹，不会污染已有代码
+//可插拔编程，我不需要统计，直接删除即可，而不用破话原有函数的功能
+//如果放大就是原有对象，原有系统的功能，这就是aop编程神奇的地方
+logTime(Func1)();
+
+logTime(Func2)();
+
+
+
+
+
+</script>

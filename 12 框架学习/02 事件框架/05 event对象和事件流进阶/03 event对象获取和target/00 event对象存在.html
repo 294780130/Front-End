@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+
+<body>
+
+<button id='btn'>点击</button>
+</body>
+</html>
+<script>
+	var btn = document.getElementById('btn');
+	btn.onclick = function()
+	{
+		//box();
+	    alert(arguments.length);
+		//这个参数其实就是一个对象,也就是我们要讲的事件对象...
+	}
+	
+	function box()
+	{
+		alert('111');
+		alert(arguments.length);
+	}
+</script>

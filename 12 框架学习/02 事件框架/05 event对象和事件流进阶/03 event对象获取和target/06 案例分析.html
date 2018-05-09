@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <style type="text/css">
+        *{ padding:0; margin:0; list-style:none; border:0;}
+        .all{ width:430px; height:auto; padding:10px; border:1px solid #000; margin:100px auto;}
+        .all h1{ height:30px; line-height:30px; text-align:center;}
+        .all h1 span{ float:left; width:100px; margin-right:10px; height:30px; background:#ccc; cursor:pointer;}
+        .all ul li{ height:200px; background:#EA4DBB; display:none;}
+        .all ul li.first{ display:block;}
+        .all h1 span.first{ background:#EA4DBB;}
+    </style>
+    <script src="itcast.js"></script>
+</head>
+
+<body>
+<div class="all" id="box">
+    <h1>
+        <span class="first">新闻</span>
+        <span>汽车</span>
+        <span>生活</span>
+        <span style=" margin-right:0">财经</span>
+    </h1>
+    <ul>
+        <li class="first">新闻的内容</li>
+        <li>汽车的内容</li>
+        <li>生活的内容</li>
+        <li>财经的内容</li>
+    </ul>
+</div>
+</body>
+</html>
+<script src='itcast.js'></script>
+<script type="text/javascript">
+    //    基础班tab 鼠标悬浮将当前的头部的颜色置为选中状态，其余复位
+    window.onload=function(){
+        function mytab(myid){
+            var box=document.getElementById(myid);
+            var spans=box.getElementsByTagName('span');
+            var lis=box.getElementsByTagName('li');
+
+            for(var i=0;i<spans.length;i++){
+                spans[i].xinwu=i
+                spans[i].onmouseover=function(e){
+                    //alert('ok')
+//                    排他思想  将所有的初始化
+                    for(var i=0;i<spans.length;i++){
+                        spans[i].className=''
+                        lis[i].className=''
+                    }
+
+//                    将当前点击元素置为选中状态
+                    //两种实现方式
+                    //this.className='first'
+                    //非兼容性写法
+                    //e.target.className = 'first'
+                    //兼容性写法
+                    $$.GetTarget(e).className = 'first'
+
+                    lis[this.xinwu].className='first'
+                }
+            }
+        }
+
+        mytab('box')
+    }
+</script>

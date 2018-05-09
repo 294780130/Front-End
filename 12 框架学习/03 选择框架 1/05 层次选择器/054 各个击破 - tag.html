@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style type="text/css">
+	*{padding: 10px;}
+</style>
+<body>
+<div id="container">
+	<h3>h3</h3>
+	<div class='div'>
+		<p class='moshou'>魔兽世界</p>
+		<p class="hero">英雄联盟</p>
+		<p id="dream">梦幻西游</p>
+	</div>
+    <div class='div'>
+        <p class='moshou2'>魔兽世界2</p>
+        <p class="hero2">英雄联盟2</p>
+        <p id="dream2">梦幻西游2</p>
+    </div>
+</div>
+
+<script src='itcast.js'></script>
+<script type="text/javascript">
+	var doms = $cengci('#container .div p');
+	for(var i = 0, len = doms.length; i < len; i++){
+		doms[i].style.border = '1px solid red';
+	}
+
+	function $cengci(select){
+		//个个击破法则 -- 寻找击破点
+		var sel = select.split(' ');
+		var context=[];
+		var result=[];
+		for(var i = 0, len = sel.length; i < len; i++){
+			var item = sel[i];
+			var first = sel[i].charAt(0)
+			var index = item.indexOf(first)
+			var name = item.slice(index + 1)
+			if(first ==='#'){
+				//如果是#，找到该元素，
+				getElementsByID(name)
+				context = result;
+			}else if(first ==='.'){
+				//如果是.
+				getElementsByClass(context,name)
+				context = result;
+			}else{
+				//如果是标签
+                getElementsByTag(context)
+                context = result;
+			}
+		}
+		function getElementsByID(name) {
+			pushArray([$$.$id(name)]);
+		}
+		function getElementsByClass(parents,name) {
+			if(parents.length){
+				for(var j = 0, contextLen = parents.length; j < contextLen; j++){
+					pushArray($$.$class(name, context[j]));
+				}
+			}else{
+				pushArray($$.$class(name));
+			}
+		}
+		function getElementsByTag(parents) {
+            //如果是标签
+            //遍历父亲，找到父亲中的元素==父亲都存在context中
+            if(parents.length){
+                for(var j = 0, contextLen = parents.length; j < contextLen; j++){
+                    pushArray($$.$tag(item, context[j]));
+                }
+            }else{
+                pushArray($$.$tag(item));
+            }
+		}
+		//封装重复的代码
+		function pushArray(doms){
+			for(var j= 0, domlen = doms.length; j < domlen; j++){
+				result.push(doms[j])
+			}
+		}
+	}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+<style type="text/css">
+	li{height: 30px; background-color: pink; list-style: none; margin-bottom: 10px;}
+</style>
+</head>
+<body>
+<ul id="container">
+	<li>水果</li>
+    <li>水果</li>
+    <li>水果</li>
+    <li>水果</li>
+    <li>水果</li>
+    <li>水果</li>
+    <li>水果</li>
+    <li>水果</li>
+    <li>水果</li>
+    <li>水果</li>
+    <li>水果</li>
+    <li>水果</li>
+    <li>水果</li>
+    <li>水果</li>
+    <li>水果</li>
+    <li>水果</li>
+    <li>水果</li>
+    <li>水果</li>
+    <li>水果</li>
+    <li>水果</li>
+    <li>水果</li>
+    <li>水果</li>
+    <li>水果</li>
+    <li>水果</li>
+    <li>水果</li>
+    <li>水果</li>
+    <li>水果</li>
+    <li>水果</li>
+    <li>水果</li>
+    <li>水果</li>
+    <li>水果</li>
+    <li>水果</li>
+    <li>水果</li>
+    <li>水果</li>
+    <li>水果</li>
+    <li>水果</li>
+    <li>水果</li>
+    <li>水果</li>
+    <li>水果</li>
+    <li>水果</li>
+</ul>
+<script type="text/javascript">
+//    传统开发方式
+	var ul = document.getElementById('container'),
+		lis = document.getElementsByTagName('li')
+
+	for(var i = 0,len=lis.length;i<len;i++){
+		lis[i].onclick = function(){
+			this.style.backgroundColor = 'green';
+		}
+	}
+
+</script>
+</body>
+</html>

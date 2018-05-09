@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        div{
+            height:5000px;
+            width:5000px
+        }
+    </style>
+</head>
+<body>
+<div>111111111111111111111111</div>
+</body>
+</html>
+<script>
+
+
+console.log(wHeight())
+console.log(wWidth())
+
+console.log(wScrollHeight())
+console.log(wScrollWidth())
+
+
+console.log(wScrollTop())
+console.log(wScrollLeft())
+
+
+    //    文档可视区域的高度和宽度：
+    //    解释：也就是页面区域的高度和宽度
+    //    获取方式；document.documentElement.clientHeight /clientWidth：文档篇
+    //    浏览器可视窗口大小(IE和FF通用)：该值不受样式表制约，
+    //    只会随浏览器窗口大小变化
+
+
+    //    获取页面/文档可视窗口大小：火狐，谷歌，欧朋浏览器提供了一个windows.innerWidth和windows.innerHeight方法来获取串口的可视大小。
+    //    IE6以上的浏览器提供了一个document.documentElement.clientWidth和document.documentElement.clientHeight来获取文档可视窗口的大小，
+    //    IE6以下使用document.body.clientWidth。但同时火狐，谷歌，欧鹏浏览器也支持document.documentElement.clientWidth方法，
+    //    所以所有的浏览器可以统一使用document.documentElement.clientWidth来获取文档可视窗口的大小。
+        function wWidth(){
+            return document.documentElement.clientWidth
+        }
+        function wHeight(){
+            return document.documentElement.clientHeight
+        }
+        //文档滚动区域的整体的高和宽
+        function wScrollHeight() {
+            return document.body.scrollHeight
+        }
+        function wScrollWidth() {
+            return document.body.scrollWidth
+        }
+
+
+        //scrollTop
+        // 获取滚动条相对于其顶部的偏移
+        //在实际应用中经常会遇到以下问题：
+        //document.documentElement.scrollTop在Chrome里总为0
+        //document.body.scrollTop 在IE和firefox里总为0
+        //每个浏览器显示数字也是不一样的，那么如何处理呢
+
+        //IE6/7/8/9/10：
+        //对于没有doctype声明的页面里可以使用  document.body.scrollTop 来获取 scrollTop高度 ；
+        //对于有doctype声明的页面则可以使用 document.documentElement.scrollTop  ；
+
+        //Safari:
+        //safari 比较特别，有自己获取scrollTop的函数 ： window.pageYOffset ；
+        //
+        //Firefox:
+        //火狐等等相对标准些的浏览器就省心多了，直接用 document.documentElement.scrollTop ；
+        //
+
+
+        //ScrollLeft同理
+
+        //完美的获取方法
+        function wScrollTop() {
+            var scrollTop = window.pageYOffset|| document.documentElement.scrollTop || document.body.scrollTop;
+            return scrollTop
+        }
+
+        function wScrollLeft() {
+            var scrollLeft = document.body.scrollLeft || (document.documentElement && document.documentElement.scrollLeft);
+            return scrollLeft
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+//第二种写法  -- 浏览器兼容性写法
+function wHeight2(){
+    //窗口的可视高度
+    var windowHeight=0;
+    if (window.innerHeight)
+        windowHeight = window.innerHeight;
+    else if ((document.body) && (document.body.clientHeight))
+        windowHeight = document.body.clientHeight;
+    return windowHeight
+}
+
+function wWidth2() {
+    // 获取窗口宽度
+    var winWidth=0;
+    if (window.innerWidth)
+        winWidth = window.innerWidth;
+    else if ((document.body) && (document.body.clientWidth))
+        winWidth = document.body.clientWidth;
+    return winWidth
+}
+
+
+
+//    第3种计算方式
+    //取页面内容的高度（所有浏览器中的取法）
+    //Math.max(document.getElementsByTagName("body")[0].scrollHeight, 窗口的可视高度)
+function wHeight3(){
+    //窗口的可视高度
+//        all 方法最初是由 IE 浏览器拥有的，并不属于 W3C 规范范畴，他返回调用 all 方法的 HTML 标记自身内的所有子孙元素的 HTML 标记集合 。
+    var windowHeight=document.all ? document.getElementsByTagName("html")[0].offsetHeight : window.innerHeight;
+    return windowHeight;
+}
+
+//第四种写法
+    function wHeight4(){
+    var pageHeight=Math.max(wHeight(), document.getElementsByTagName("body")[0].scrollHeight);
+    return pageHeight
+}
+
+
+
+
+
+function wHeight(){
+    //窗口的可视高度
+//        all 方法最初是由 IE 浏览器拥有的，并不属于 W3C 规范范畴，他返回调用 all 方法的 HTML 标记自身内的所有子孙元素的 HTML 标记集合 。
+    var windowHeight=document.all ? document.getElementsByTagName("html")[0].offsetHeight : window.innerHeight;
+    return windowHeight;
+}
+
+function wHeight2(){
+    //窗口的可视高度
+    var windowHeight=0;
+    if (window.innerHeight)
+        windowHeight = window.innerHeight;
+    else if ((document.body) && (document.body.clientHeight))
+        windowHeight = document.body.clientHeight;
+    return windowHeight
+}
+
+function wWidth() {
+    // 获取窗口宽度
+    var winWidth=0;
+    if (window.innerWidth)
+        winWidth = window.innerWidth;
+    else if ((document.body) && (document.body.clientWidth))
+        winWidth = document.body.clientWidth;
+    return winWidth
+}
+
+
+</script>

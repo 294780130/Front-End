@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        div{
+            height:400px;
+            width:500px;
+            background:green;
+            padding:40px;
+            position: absolute;
+        }
+        #child{
+            height:200px;
+            width:200px;
+            background:yellow;
+            margin: 100px;
+            position: absolute;
+        }
+        #grandson{
+            height:50px;
+            width:50px;
+            background:red;
+            margin: 30px;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<div id="div">
+    <div id="child">
+        <div id="grandson"></div>
+    </div>
+</div>
+
+
+</body>
+</html>
+<script src='itcast.js'></script>
+<script>
+console.log('相对坐标')
+console.log( offset('div'))
+console.log( offset('child'))
+console.log( offset('grandson'))
+
+
+console.log('绝对坐标')
+console.log( absoluteOffset('div'))
+console.log( absoluteOffset('child'))
+console.log( absoluteOffset('grandson'))
+
+
+
+
+//    rootLeft('div')
+//    rootTop('div')
+
+//      两种坐标：
+//    当我们计算一个DOM元素位置也就是坐标的时候，会涉及到两种坐标系，文档坐标和视口坐标。
+//    文档坐标：我们经常用到的document就是整个页面部分，而不仅仅是窗口可见部分，还包括因为窗口大小限制而出现滚动条的部分，它的左上角就是我们所谓相对于文档坐标的原点。
+//    视口坐标：视口是显示文档内容的浏览器的一部分，它不包括浏览器外壳（菜单，工具栏，状态栏等），也就是当前窗口显示页面部分，不包括滚动条。
+//
+
+
+
+
+//    两个概念：绝对定位 相对定位
+
+
+//    元素的相对位置：每个元素都有offsetTop和offsetLeft属性，
+// 表示该元素的左上角与父容器（offsetParent对象）左上角的距离
+
+
+function offset(id){
+    //获取元素的坐标值
+    function offsetLeft(dom){
+        return dom.offsetLeft
+    }
+    function offsetTop(dom){
+        return dom.offsetTop
+    }
+
+
+    var dom = $$.$id(id);
+    return {top:offsetTop(dom),left:offsetLeft(dom)}
+}
+
+
+//    元素的绝对位置：指该元素的左上角相对于整张网页左上角的坐标。这个绝对位置要通过计算才能得到。
+//    首先，每个元素都有offsetTop和offsetLeft属性，表示该元素的左上角与父容器（offsetParent对象）左上角的距离。
+//    所以，只需要将这两个值进行累加，就可以得到该元素的绝对坐标。
+
+//实现原理
+//在阅读javascript高级程序设计第三版DOM部分时，
+//了解到要获取某个元素在页面上的偏移量，
+//需要将这个元素的offsetLeft和offsetTop与其offsetParent的相同属性相加，一直循环直至根元素。
+//所以，要得到元素到文档区域的坐标位置，
+//只需通过while循环不断获取offsetParent的offsetLeft/offsetTop直到offsetParent = null为止。
+
+    function absoluteOffset(id){
+
+        function absolateLeft(id){
+            var dom = $$.$id(id)
+            var left = offset(id).left;
+            var parent = dom.offsetParent;
+            while (parent !== null){
+                left += parent.offsetLeft;
+                parent = parent.offsetParent;
+            }
+            return left;
+        }
+        function absolateTop(id){
+            var dom = $$.$id(id)
+            var top = offset(id).top;
+            var parent = dom.offsetParent;
+            while (parent !== null){
+                top += parent.offsetTop;
+                parent = parent.offsetParent;
+            }
+            return top;
+        }
+
+
+        return {top:absolateTop(id),left:absolateLeft(id)}
+    }
+</script>

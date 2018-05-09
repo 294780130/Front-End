@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<style type="text/css">
+    *{padding: 10px;}
+    div{
+        color:red;
+        font-size:50px;
+    }
+    .div{
+        color:blue;
+        font-size:50px;
+    }
+</style>
+<body>
+<div class="container">传智播客</div>
+<div class="container">传智播客</div>
+<div class="container">传智播客</div>
+<div class="container">传智播客</div>
+<div class="container">传智播客</div>
+<button id="mybtn">按钮</button>
+</body>
+</html>
+<script src='itcast.js'></script>
+<script type="text/javascript">
+
+    $$.$id('mybtn').onclick = function(){
+        attr('.container','name','hello');
+        attr('.container','class','div');
+    }
+
+    //属性操作，获取属性的值，设置属性的值 at tr（'test','target','_blank'）
+    function attr(content, key, value){
+        var dom =  $$.$all(content);
+//        如果是数组  比如tag
+        if(dom.length){
+            if(value){
+                for(var i= 0, len=dom.length; i <len; i++){
+                    dom[i].setAttribute(key, value);
+                }
+            }else{
+                return dom[0].getAttribute(key);
+            }
+//            如果是单个元素  比如id
+        }else{
+            if(value){
+                dom.setAttribute(key, value);
+            }else{
+                return dom.getAttribute(key);
+            }
+        }
+    }
+
+</script>
+

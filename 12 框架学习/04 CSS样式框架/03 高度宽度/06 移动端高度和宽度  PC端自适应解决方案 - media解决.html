@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        /*pc端自适应解决方案*/
+        @media screen and (min-width: 960px) {
+            body { background-color: green; }
+        }
+
+        @media screen and (max-width: 960px) and (min-width: 500px) {
+            body { background-color: pink; }
+        }
+
+        @media screen and (max-width: 500px) {
+            body { background-color: yellow; }
+        }
+
+        .element{
+            width: 100%;
+            padding-left: 10px;
+            border: 1px solid blue;
+            font-size:100px
+        }
+
+        /*移动设备存在的问题 -- 视口不一样*/
+    </style>
+</head>
+<body>
+    <div class='element'>传智播客</div>
+
+</body>
+</html>

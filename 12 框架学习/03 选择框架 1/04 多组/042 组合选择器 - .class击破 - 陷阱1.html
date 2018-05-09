@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>无标题文档</title>
+	<style type="text/css">
+		*{height: 50px; padding: 10px; margin: 10px;}
+		body{padding: 0;}
+	</style>
+</head>
+
+<body>
+<h3>h3</h3>
+<div  class='moshou'>魔兽世界</div>
+
+<div class="hero">英雄联盟</div>
+
+<span id="dream">梦幻西游</span>
+</body>
+</html>
+<script src='itcast.js'></script>
+<script>
+
+	//    为什么只有一个被选中
+	var dom = $group('.moshou,.hero');
+	for(var i = 0, len1 = dom.length; i < len1; i++){
+		dom[i].style.border = '1px solid red';
+	}
+
+	function $group(content) {
+		//总体思路： 个个击破
+		//找到个个 ---放在数组里面 ---遍历--个个击破
+		//三种情况
+//		  doms充当中间变量
+//        arr保存待处理的字符串集合
+		var arr=[],result=[],doms=[];
+		arr = content.split(',');
+		//alert(arr.length);
+		for(var i=0,len=arr.length;i<len;i++) {
+			var first= arr[i].charAt(0)
+			if(first === '.') {
+				var index = arr[i].indexOf('.')
+				doms=$$.$class(arr[i].slice(index+1))
+//					每次循环将doms保存在reult中
+				result.push(doms);
+			}
+		}
+        console.log(result[0]) //这里result【0】中是一个数组
+        return result;
+	}
+</script>

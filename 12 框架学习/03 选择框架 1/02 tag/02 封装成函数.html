@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+
+	span{
+        height:300px;
+        width:300px;
+        background:#F00;
+        margin: 10px;
+    }
+</style>
+</head>
+
+<body>
+    <span id='span'>点击我变成蓝色</span>
+    <span id='span2'>点击我变成蓝色</span>
+    <span id='span3'>点击我变成蓝色</span>
+    <span id='span4'>点击我变成蓝色</span>
+</body>
+</html>
+<script>
+
+    function $tag(tag) {
+        return document.getElementsByTagName(tag);
+    }
+
+    var spans =  $tag('span');
+    for(var i=0;i<spans.length;i++){
+        spans[i].onclick = function(){
+            this.style.background= 'blue';
+        }
+    }
+</script>

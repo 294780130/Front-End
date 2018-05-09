@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>脚本之家</title>
+    <style type="text/css">
+        table{
+            width:300px;
+            height:60px;
+            background-color:green;
+        }
+        table td{
+            background-color:white;
+        }
+    </style>
+
+</head>
+<body>
+<div id="div">传智播客</button>
+    <table cellspacing="1" id='table'>
+        <tr>
+            <td>单元格</td>
+            <td>单元格</td>
+            <td>单元格</td>
+            <td>单元格</td>
+            <td>单元格</td>
+        </tr>
+        <tr>
+            <td>单元格</td>
+            <td>单元格</td>
+            <td>单元格</td>
+            <td>单元格</td>
+            <td>单元格</td>
+        </tr>
+    </table>
+</body>
+</html>
+<script src='itcast.js'></script>
+<script>
+    $$.$id('div').onclick=function(e){
+        $$.GetTarget(e).style.background='red'
+    }
+</script>
+<script>
+
+    delegate('table','onclick','td',function(){
+        this.style.color='white'
+        this.style.background='red'
+    })
+</script>

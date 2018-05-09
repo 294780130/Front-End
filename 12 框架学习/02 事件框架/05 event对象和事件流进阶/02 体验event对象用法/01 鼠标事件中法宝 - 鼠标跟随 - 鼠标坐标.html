@@ -1,0 +1,40 @@
+<script type="text/javascript">
+
+    function mousePosition(ev){
+        //支持 火狐
+        if(ev.pageX || ev.pageY){
+            return {x:ev.pageX, y:ev.pageY};
+        }
+        //支持IE
+        return {
+            x:ev.clientX + document.body.scrollLeft - document.body.clientLeft,
+            y:ev.clientY + document.body.scrollTop - document.body.clientTop
+        };
+    }
+
+    function mouseMove(ev){
+        ev = ev || window.event;
+        var mousePos = mousePosition(ev);
+
+        document.getElementById('div1').innerHTML = mousePos.x +":"+mousePos.y ;
+        document.getElementById('div1').style.left = mousePos.x+10;
+        document.getElementById('div1').style.top = mousePos.y+50;
+    }
+
+    //事件添加
+    document.onmousemove = mouseMove;
+
+
+</script>
+<body>
+<p id='pi'></p>
+<div id='div1'  style="position:absolute;
+  left:50;  
+  top:10;  
+  z-index:1000;  
+  padding:0px;  
+  background-color:#FFFFCC;  
+  color:#201000;  
+  font-size:12px;  
+  border:1px   solid   #284860;"></div>
+</body>

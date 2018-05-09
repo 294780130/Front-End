@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+
+<body>
+<div onclick="openWin('http://www.baidu.com')" style='padding:50px;background:yellow'>
+  <div onclick="openWin('http://www.sina.com')" style='height:300px; width:300px; background:#F00'>打开新浪</div>
+</div>
+
+<script>
+// 例你实际希望点击灰色盒子打开sina首页，而点击黑色盒子打开baidu首页，但结果你点击灰色盒子的时候，
+// 却是同时打开了两个网页。
+///其实在实际设计中较少遇到此问题，
+//你可能会想如果我在页面不同DOM深处安置了不同的按钮或链接，深层处的事件触发会不会波及顶层的按钮呢？
+// 不会，因为按钮和链接不能形成嵌套关系
+function openWin(url)
+{
+   window.open(url);
+}
+
+</script>
+</body>
+</html>

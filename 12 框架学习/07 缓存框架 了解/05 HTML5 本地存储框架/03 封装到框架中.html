@@ -1,0 +1,57 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <title>登录</title>
+</head>
+
+<body>
+<form action="">
+    <p>
+        <span>UserName:</span>
+        <input id="userName" type="text" value=""/></p>
+    <p>
+        <span>Password:</span>
+        <input id="password" type="password" value=""/></p>
+    <p>
+        <span style="font-size:12px; color:blue;">记住密码10天</span>
+        <input id="saveCookie" type="checkbox" value="" /></p>
+    <p>
+        <input id="submit" type="button" value="GO" />
+    </p>
+</form>
+</body>
+</html>
+<script src='../itcast.js'></script>
+<script>
+
+    //cookie可能被浏览器进制 cookie不安全
+    //cookie有大小显示 -- 4KB
+    window.onload = function(){
+        //分析cookie值，显示上次的登陆信息
+        var userNameValue = $$.store.get("name");
+        $$.$id("userName").value = userNameValue;
+
+        var passwordValue = $$.store.get("password");
+        $$.$id("password").value = passwordValue;
+
+        //写入点击事件
+        $$.$id("submit").onclick = function() {
+            var userNameValue = $$.$id("userName").value;//取前台用户名的值
+            var passwordValue = $$.$id("password").value; //取前台密码的值
+
+            //服务器验证（模拟） 这里是对用户的一个验证．在项目中，你读取数据库的代码写在这
+
+            //如果存在这个用户,就把用户名和密码存进cookie
+            if(true){
+                $$.store.set("name",$$.$id("userName").value);
+                $$.store.set("password",$$.$id("password").value);
+                alert("登陆成功,欢迎你," + userNameValue + "!");
+            }else {
+                alert("用户名或密码错误，请重新输入！");
+            }
+        }
+    }
+</script>
+

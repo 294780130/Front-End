@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script src='../09%20常用事件的法宝/ICD.js'></script>
+<script src='../09%20常用事件的法宝/jquery-1.11.2.min.js'></script>
+</head>
+
+<body>
+<img id='img' src="../img/1.jpg" onload='loadImg(this)'/>
+
+</body>
+</html>
+<script>
+
+var img = document.getElementById('img');
+
+
+//老方法
+//function loadImg(img)
+//{
+//	var s=img.src;
+//	alert('加载的图像名称为'+s);
+//}
+
+//通过事件对象方法
+//    用途举例，微博头像悬浮显示 --点击某个图片，获取这个图片的的详细信息，通过给这个图片使用自定义属性id，
+//    然后通过e的方式获取该属性，然后再ajax从后台读取数据
+//img.onload = function(e)
+//{
+//	//alert('nihao');
+//	var s=e.target.src;
+//    alert( "加载的图像为：" + s.substring(s.lastIndexOf("/")+1) );
+//}
+
+//通过封装方法实现
+//封装方法是没有on的 -- 通过捕获方式是不加on 的
+
+
+on('img','load',function(e){
+	   var target =  getTarget(e);
+	   alert('加载的图像名称为'+target.src);
+	 	//alert('加载完成');
+	 });
+
+</script>

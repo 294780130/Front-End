@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>test</title>
+<head>
+    <script src='jquery-1.11.2.min.js'></script>
+    <style>
+        div{
+            width:400px;
+            height:400px;
+            background:orange;
+        }
+    </style>
+</head>
+<body>
+<!--点击事件捕获，就是当你点击一个按钮，程序会从最外层开始遍历，直到找到你点击的元素-->
+<!--这里，当你点击按钮后，先从最上面开始，也就是body开始，
+    然后找到body的儿子， --div，
+    然后再找到div 的儿子  buhuo-->
+<div>
+    <button type="button" id="buhuo">事件捕获</button>
+    <button id="paopao">事件冒泡</button>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+    $(function(){
+        $('#paopao').click(function(){
+            alert('hello');
+        });
+        $('body').click(function(){
+            alert('baby');
+        });
+    });
+
+//    $(function(){
+//
+//    });
+//
+//    $(function(){
+//
+//    });
+//
+//    $(function(){
+//
+//    });
+//
+//    $(function(){
+//
+//    });
+</script>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        div{
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+<button id="btn">按钮</button>
+<div id='div'></div>
+</body>
+<script src='itcast.js'></script>
+<script type="text/javascript">
+
+    //测试
+    $$.event.click('btn', function(){
+        document.getElementsByTagName('div')[0].style.background = 'green'
+    });
+
+    $$.event.mouseover('div', function(){
+        this.style.background = 'blue'
+    });
+
+    $$.event.mouseout('div', function(){
+        this.style.background = 'green'
+    });
+
+</script>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>Untitled Document</title>
+</head>
+<body>
+   <img src="../08%20event对象/ball.png" style="position:absolute;z-index:10000;width:30px;height:30px;cursor:pointer">
+</body>
+  <html>
+  <script type="text/javascript">
+document.onmousemove=function(e){
+    var e=e?e:window.event;
+    var posx=e.clientX;
+    var posy=e.clientY;
+    document.images[0].style.left=-15+posx+"px";
+    document.images[0].style.top=-15+posy+"px";
+}
+</script>
+

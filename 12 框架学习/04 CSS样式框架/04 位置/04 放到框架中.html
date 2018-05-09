@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        div{
+            height:400px;
+            width:500px;
+            background:green;
+            padding:40px;
+            position: absolute;
+        }
+        #child{
+            height:200px;
+            width:200px;
+            background:yellow;
+            margin: 100px;
+            position: absolute;
+        }
+        #grandson{
+            height:50px;
+            width:50px;
+            background:red;
+            margin: 30px;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<div id="div">
+    <div id="child">
+        <div id="grandson"></div>
+    </div>
+</div>
+
+
+</body>
+</html>
+<script src='itcast.js'></script>
+<script>
+    console.log('相对坐标')
+    console.log( $$.offset('div'))
+    console.log( $$.offset('child'))
+    console.log( $$.offset('grandson'))
+
+    console.log('绝对坐标')
+    console.log( $$.position('div'))
+    console.log( $$.position('child'))
+    console.log( $$.position('grandson'))
+
+</script>

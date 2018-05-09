@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+div{position: absolute; right: 100px; top: 300px; padding: 10px; border: 1px solid red; background: pink; font-size: 18px; color: white; font-weight: bold; line-height: 20px; cursor: pointer;}
+body{height: 1000px;}
+</style>
+	<script src='../08%20event对象/jquery-1.11.2.min.js'></script>
+</head>
+
+<body id='body'>
+	<div id="back">返回<br>顶部</div>
+</body>
+</html>
+<script>
+    function on(id, type, fn){
+        var dom = document.getElementById(id);
+        //如果支持
+        //W3C版本 --火狐 谷歌 等大多数浏览器
+        //如果你想检测对象是否支持某个属性，方法，可以通过这种方式
+        if(dom.addEventListener ){
+            dom.addEventListener(type, fn, false);
+        }else if(dom.attachEvent){
+            //如果支持 --IE
+            //
+            dom.attachEvent('on' + type, fn);
+        }
+    }
+
+    function un(id, type, fn){
+        var dom = document.getElementById(id);
+        if(dom.removeEventListener){
+            dom.removeEventListener(type, fn);
+        }else if(dom.detachEvent){
+            dom.detachEvent(type, fn);
+        }
+    }
+
+	//滚动条事件
+    $(window).on('scroll',function(){
+        //首先我需要获取back距离上面是多少
+        //当我滚动滚动条的时候,使得back总是距离上面固定的距离
+        var top =window.scrollY||document.documentElement.scrollTop;
+        $('#back').css( 'top', top + 300 + 'px');
+    });
+
+		//当我点击返回顶部的时候,滚动条能够返回顶部
+
+
+	on('back','click',function(){
+		   window.scrollTo(0,0);
+		});
+</script>

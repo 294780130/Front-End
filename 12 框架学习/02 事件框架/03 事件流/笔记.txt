@@ -1,0 +1,90 @@
+【事件框架】
+
+【回顾一下】
+
+<button onclick=''>
+
+<button id='btn'></button>
+
+<script>
+
+ var btn = document....
+ btn.onclick = function()
+{
+	
+}
+</script>
+
+
+DOM0
+
+【事件发展历程】
+
+
+D0M0体系
+DOM2体系
+
+《为什么需要DOM2体系 -- 事件的发展过程》
+
+
+【D0M2事件体系】
+
+
+冒泡 ：从最特定元素---向最不特定元素冒泡 （document body）
+捕获： 捕获和冒泡相反 -- 从最不特定元素开始--最特定元素
+事件流：整合了捕获和冒泡，  先捕获再冒泡。
+
+《dom2监听语法 addEventListener（type，fn，开关）》
+
+W3C标准
+
+type：事件类型 -- 比如点击 鼠标 键盘
+
+fn：事件执行的函数
+
+开关： 设置是冒泡还是捕获
+
+
+《微软体系》
+
+jian。。 IE
+
+attachEvent
+
+
+《D0M2体系的优越性》
+可以监听多个事件
+
+《DOM0 2的执行顺序》
+
+dom0优先dom2
+
+《如何移除监听addEventListener（type，fn，开关）》
+
+《微软移除监听体系detachEvent（'onclick', Fn）》
+ie中移除事件处理程序
+btn.detachEvent('onclick', Fn);
+
+《封装框架》
+
+兼容所有浏览器
+
+
+标准-- 大部分浏览器使用的。。。
+IE  -- 微软公司
+
+
+
+绑定事件
+解除绑定
+
+
+
+
+
+
+
+
+
+
+

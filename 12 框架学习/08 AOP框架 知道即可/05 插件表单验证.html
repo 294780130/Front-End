@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+
+<body>
+	用户名：<input id="username" type="text"/>
+
+	密码： <input id="password" type="password"/>
+	<input id="submitBtn" type="button" value="提交"></button>
+</body>
+</html>
+<script>
+	var username = document.getElementById( 'username' ),
+		password = document.getElementById( 'password' ),
+		submitBtn = document.getElementById( 'submitBtn' );
+		var formSubmit = function(){
+			if ( username.value === '' ){
+				return alert ( '用户名不能为空' );
+			}
+			if ( password.value === '' ){
+				return alert ( '密码不能为空' );
+			}
+			//如果通过校验，继续执行 获取用户名  密码传递给后台
+			var param = {
+				username: username.value,
+				password: password.value
+			}
+			//如果验证通过，则执行。如果不通过则不执行ajax代码
+			//ajax( 'http:// xxx.com/login', param ); // ajax 具体实现略
+		}
+	
+		submitBtn.onclick = function(){
+			formSubmit();
+		}
+
+</script>

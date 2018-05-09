@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<style type="text/css">
+    *{padding: 10px;}
+</style>
+<body>
+<div id="container">
+    <h3>h3</h3>
+    <div>
+        <p class='game1'>魔兽世界</p>
+        <p class="game1">英雄联盟</p>
+        <p class="game1">梦幻西游</p>
+    </div>
+    <div class='div'>
+        <p class="game">魔兽世界2</p>
+        <p class="game">英雄联盟2</p>
+        <p class="game">梦幻西游2</p>
+    </div>
+    <strong>超级玛丽</strong>
+    <strong>斗地主</strong>
+    <strong>打麻将</strong>
+</div>
+</body>
+</html>
+<script src='itcast.js'></script>
+<script>
+    //多组
+    //    var mys = $('strong,h3');
+    //    for(var i = 0, len = mys.length; i < len; i++){
+    //        mys[i].style.border = '1px solid red';
+    //    }
+
+    //层次
+    //    var mys = $('p.game');
+    //    for(var i = 0, len = mys.length; i < len; i++){
+    //        mys[i].style.border = '1px solid red';
+    //    }
+
+
+    //    层次
+    var mys = $$.$all('#container div .game');
+    for(var i = 0, len = mys.length; i < len; i++){
+        mys[i].style.border = '1px solid red';
+    }
+
+
+
+    //层次+分组
+    //        var mys = $('#container div p,#container .div p,strong');
+    //        for(var i = 0, len = mys.length; i < len; i++){
+    //            mys[i].style.border = '1px solid red';
+    //        }
+
+
+
+</script>

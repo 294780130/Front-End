@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<button id="btn">按钮</button>
+<p></p>	
+</body>
+<script type="text/javascript">
+
+function on(id, type, fn){
+	var dom = document.getElementById(id);
+	//如果支持
+	//W3C版本 --火狐 谷歌 等大多数浏览器
+	//如果你想检测对象是否支持某个属性，方法，可以通过这种方式
+	if(dom.addEventListener ){
+		dom.addEventListener(type, fn, false);
+	}else if(dom.attachEvent){
+		//如果支持 --IE
+		//
+		dom.attachEvent('on' + type, fn);
+	}
+}
+
+
+
+function un(id, type, fn){
+	var dom = document.getElementById(id);
+	if(dom.removeEventListener){
+		dom.removeEventListener(type, fn);
+	}else if(dom.detachEvent){
+		dom.detachEvent(type, fn);
+	}
+}
+
+//测试
+on('btn', 'click', function(){
+	document.getElementsByTagName('p')[0].innerHTML = '成功绑定了事件'
+});
+</script>
+</html>

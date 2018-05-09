@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        div{
+            color:red;
+            font-size:50px;
+        }
+        .hide{display: none}
+        .show{display: block}
+    </style>
+</head>
+<body>
+<div class='div'>传智播客</div>
+<div class='div'>传智播客</div>
+<div class='div'>传智播客</div>
+<div class='div'>传智播客</div>
+<div id='div' class='div test1 test3'>传智播客</div>
+<button id='show'>显示</button>
+<button id='hide'>隐藏</button>
+</body>
+</html>
+<script src='itcast.js'></script>
+<script>
+
+    $$.$id('show').onclick=function(){
+        $$.removeClass('.div','hide')
+    }
+    $$.$id('hide').onclick=function(){
+        $$.addClass('.div','hide')
+    }
+
+    //判断是否有class
+    console.log($$.hasClass('.div','div'))
+    console.log($$.hasClass('#show','div'))
+
+    //获取class
+    console.log($$.getClass('#div'))
+
+
+
+
+</script>

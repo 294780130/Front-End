@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script src='aop.js'></script>
+<script>
+   //大家都知道window。onlad一般都是放置页面初始化的一些代码
+	window.onload=function()
+	{
+		init1();
+		init2();
+		init3();
+		//原始做法
+		//initAdd();
+	}
+function init1(){alert("初始化代码1");}
+function init2(){alert("初始化代码2");}
+function init3(){alert("初始化代码3");}
+function initAdd(){alert("需要扩展的功能或者动态添加的功能");}
+</script>
+</head>
+
+<body>
+</body>
+</html>
+<script>
+
+
+ 
+ //通过AOP模式，我们不需要破话原有代码结构，通过注入的形式扩展功能
+ window.onload = window.onload.after(function() {
+	   initAdd();
+});
+
+ //j假设我们要给window.load扩展一些功能，原始做法直接修改window.onload函数
+</script>

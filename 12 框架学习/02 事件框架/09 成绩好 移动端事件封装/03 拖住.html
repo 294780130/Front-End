@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .div{
+            width:100px;
+            height:100px;
+            background:red
+        }
+    </style>
+</head>
+<body>
+<div id='div' class='div'>111</div>
+</body>
+</html>
+<script>
+    var div = document.getElementById('div')
+    div.addEventListener("touchmove", function(event){
+        // Only deal with one finger
+        if(event.touches.length == 1){
+            // Get the information for finger #1
+            var touch = event.touches[0],
+            // Find the style object for the node the drag started from
+                    style = touch.target.style;
+            // Position the element under the touch point
+            style.position = "absolute";
+            style.left = touch.pageX + "px";
+            style.top = touch.pageY + "px";
+        }
+    }, false);
+</script>

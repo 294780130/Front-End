@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style type="text/css">
+#piano{margin: 100px auto; width: 500px; position: relative;}
+ul{margin: 0; padding: 0;}
+li{list-style: none; width: 60px; float: left; height: 300px; border: 1px solid #ccc; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px;}
+.show{background: pink; border: 1px solid red;}
+#piano div{background: black; width: 50px; height: 200px; position: absolute; top: 0; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px;}
+#black_1{left: 35px;}
+#black_2{left: 100px;}
+#black_3{left: 220px;}
+#black_4{left: 285px;}
+#black_5{left: 350px;}
+</style>
+<body>
+<audio id="audio" src=''></audio>
+<div id="piano">
+	<ul>
+		<li id="li_1"></li>
+		<li id="li_2"></li>
+		<li id="li_3"></li>
+		<li id="li_4"></li>
+		<li id="li_5"></li>
+		<li id="li_6"></li>
+		<li id="li_7"></li>
+	</ul>
+	<div id="black_1"></div>
+	<div id="black_2"></div>
+	<div id="black_3"></div>
+	<div id="black_4"></div>
+	<div id="black_5"></div>
+</div>
+
+</body>
+<script type="text/javascript">
+    //获取
+var audio = document.getElementById('audio');;
+window.onkeydown = function(e){
+
+	switch(e.keyCode){
+		case 65 :
+			show('1');
+			break;
+		case 83 :
+			show('2');
+			break;
+		case 68 :
+			show('3');
+			break;
+		case 70 :
+			show('4');
+			break;
+		case 71 :
+			show('5');
+			break;
+		case 72 :
+			show('6');
+			break;
+		case 74 :
+			show('7');
+			break;
+	}
+}
+function show(id){
+	//播放音乐
+	audio.src = 'audio/' + id + '.mp3';
+	audio.play();
+	//设置样式
+	for(var i = 7; i > 0; i--){
+        //排他思想  先将所有的职位初始状态
+		document.getElementById('li_' + i).className = '';
+	}
+//    再将当前点击的职位某个样式
+	document.getElementById('li_' + id).className = 'show';
+}
+</script>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+    <style>
+    	p{height:300px;width:300px;background:#F00}
+    </style>
+</head>
+<body>
+	<button>按钮</button>
+	<button>第二个按钮</button>
+	<p></p>
+</body>
+<script type="text/javascript">
+var btn = document.getElementsByTagName('button')[0];
+var btn1 = document.getElementsByTagName('button')[1];
+var p = document.getElementsByTagName('p')[0];
+
+//传统方式实现
+btn.onclick = function()
+{
+	p.innerHTML = '传统方式实现<br/>';
+}
+//false 表示使用冒泡方式
+btn.addEventListener('click',function(){
+	  p.innerHTML += '冒泡方式实现<br/>';
+	
+},false);
+
+
+
+
+
+//btn.addEventListener('click', function(){
+//	p.innerHTML += '点击按钮触发第一个事件<br/>';
+//}, false);
+//btn.addEventListener('click', function(){
+//	p.innerHTML += '点击按钮触发第二个事件<br/>';
+//}, false);
+//btn.addEventListener('click', function(){
+//	p.innerHTML += '点击按钮触发第三个事件<br/>';
+//}, true);
+//
+//function addClickEvent1(){
+//	p.innerHTML += '点击第二个按钮触发第一个事件<br/>';
+//}
+//function addClickEvent2(){
+//	p.innerHTML += '点击第二个按钮触发第二个事件<br/>';
+//}
+//btn1.addEventListener('click', addClickEvent1, false);
+//btn1.addEventListener('click', addClickEvent1, false);
+//btn1.addEventListener('click', addClickEvent2, false);
+//btn1.removeEventListener('click', addClickEvent2, false);
+</script>
+</html>

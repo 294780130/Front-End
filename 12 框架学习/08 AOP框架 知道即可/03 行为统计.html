@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script src='aop.js'></script>
+</head>
+
+<body>
+<button id="button">图书购买</button>
+</body>
+</html>
+
+<script>
+	var buy = function(){
+		//购买
+		alert( '购买逻辑' );
+		//记录用户行为
+		log();
+	}
+	var log = function(){
+		alert( '采集用户行为');
+}
+//document.getElementById( 'button' ).onclick = buy;
+
+//如果只需要实现一个功能，还行，如果要给所有的添加，并且有可能每个函数采集方法不一样。。。
+//这里函数内部包含两个变化点：购买，记录行为 
+//按照面向对象编程思维，我们要分离出一个，保证一个函数，对象只有一个变化点
+
+
+var buyNew = buy.after( log ); // 打开登录浮层之后上报数据
+
+//采用AOP方式实现
+//这样就分离了二者，一旦需求变化，只需要修改单个模块，而不影响其他模块
+document.getElementById( 'button' ).onclick = buyNew;
+</script>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .div{
+            background:red;
+            color:yellow;
+            padding:30px
+        }
+    </style>
+</head>
+<body>
+<div class='div' id='output'>
+    欢迎进入魔兽世界
+</div>
+</body>
+</html>
+<script>
+    function handleTouchEvent(event) {
+        //只跟踪一次触摸
+        if (event.touches.length == 1) {
+            var output = document.getElementById("output");
+            switch (event.type) {
+                case "touchstart":
+                    output.innerHTML = "Touch started (" + event.touches[0].clientX + "," + event.touches[0].clientY + ")";
+                    break;
+                case "touchend":
+                    output.innerHTML += "<br>Touch ended (" + event.changedTouches[0].clientX + "," + event.changeTouches[0].clientY + ")";
+                    break;
+                case "touchmove":
+                    event.preventDefault(); //阻止滚动
+                    output.innerHTML += "<br>Touch moved (" + event.changedTouches[0].clientX + "," + event.changedTouches[0].clientY + ")";
+                    break;
+            }
+        }
+    }
+    document.addEventListener("touchstart", handleTouchEvent, false);
+    document.addEventListener("touchend", handleTouchEvent, false);
+    document.addEventListener("touchmove", handleTouchEvent, false);
+</script>

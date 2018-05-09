@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        /*古老的*/
+        a:link {color: #FF0000}
+        a:visited {color: #00FF00}
+        a:hover {color: #FF00FF}
+        a:active {color: #0000FF}
+        textarea:focus {  background:#F00;  }
+        div:lang(zh) {  background:#00F;  }
+
+        /*如果使用伪类的话*/
+        p>i:first-child {color: red}
+
+        /*如果不用伪类的话*/
+        .first-child {color: red}
+    </style>
+</head>
+<body>
+
+<a href="http://www.baidu.com">百度</a>
+<hr>
+<textarea></textarea>
+<hr>
+<div lang="zh">lang</div>
+
+<hr>
+
+<p>
+    <i>传智播客</i>
+    <i>黑马</i>
+</p>
+
+
+<p>
+    <!--如果不用伪类的话-->
+    <i class="first-child">传智播客</i>
+    <i>黑马</i>
+</p>
+</body>
+</html>
+<script>
+
+</script>

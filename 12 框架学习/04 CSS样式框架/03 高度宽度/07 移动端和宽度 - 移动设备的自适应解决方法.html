@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
+    <style>
+        /*pc端自适应解决方案*/
+        @media screen and (min-width: 960px) {
+            body { background-color: green; }
+        }
+
+        @media screen and (max-width: 960px) and (min-width: 500px) {
+            body { background-color: pink; }
+        }
+
+        @media screen and (max-width: 500px) {
+            body { background-color: yellow; }
+        }
+
+        .element{
+            width: 100%;
+            padding-left: 10px;
+            border: 1px solid blue;
+            font-size:40px
+        }
+
+
+
+        /*移动设备存在的问题 -- 视口不一样*/
+    </style>
+</head>
+<body>
+        <div class='element'>传智播客</div>
+</body>
+</html>
+

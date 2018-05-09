@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+
+<body>
+
+<div id="coords" style="width:500px;height:200px;background:#F2F1D7;border:2px solid #336699;"> 
+请在这里移动鼠标。 
+</div> 
+<div id="coord" style="width:500px;border:2px solid #336699;"> </div> 
+ 
+</body>
+</html>
+
+
+
+<script type="text/javascript"> 
+var loadEvent = function(fn) { 
+var oldonload = window.onload; 
+if (typeof window.onload != 'function') { 
+window.onload = fn; 
+}else { 
+window.onload = function() { 
+oldonload(); 
+fn();
+}
+}
+}
+
+var getCoordInDocumentExample = function(){ 
+var coords = document.getElementById("coords"); 
+coords.onmousemove = function(e){ 
+var pointer = getCoordInDocument(e); 
+var coord = document.getElementById("coord"); 
+coord.innerHTML = "X,Y=("+pointer.x+", "+pointer.y+")"; 
+} 
+} 
+
+var getCoordInDocument = function(e) { 
+//获取事件对象
+e = e || window.event; 
+//clientX获取相对浏览器边界的坐标值 + 滚动条距离左边的距离
+//pageX是火狐浏览器特有
+//pageX:整个页面
+//其余浏览器均支持clientX : 可视区域
+//如果如果计算left: 当页面出现滚动条,默认可视区域左上角为原点,而不是从页面顶部为原点计算..
+var x = e.pageX || (e.clientX + (document.documentElement.scrollLeft || document.body.scrollLeft)); 
+var y= e.pageY || (e.clientY + (document.documentElement.scrollTop || document.body.scrollTop)); 
+return {'x':x,'y':y}; 
+} 
+
+
+loadEvent(function(){ 
+getCoordInDocumentExample(); 
+}); 
+</script> 

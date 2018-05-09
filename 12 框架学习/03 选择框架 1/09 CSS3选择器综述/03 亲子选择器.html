@@ -1,0 +1,42 @@
+<!doctype html>
+<html dir="ltr" lang="zh-CN">
+<head>
+    <meta charset="utf-8"/>
+    <title>亲子选择器</title>
+    <style type="text/css">
+        /*选择p的所有儿子*/
+        p > strong {
+            background:red;
+        }
+        /*选择p的儿子中属性包含ss的*/
+        p > [ss] {
+            background: DodgerBlue;
+        }
+
+        p > [name] {
+            background: green;
+        }
+    </style>
+    <script type="text/javascript" charset="utf-8">
+
+    </script>
+</head>
+<body>
+    <pre>
+        p > strong {
+        background:red;
+        }
+        p > [ss] {
+        background: DodgerBlue;
+        }
+    </pre>
+    <p>
+        <span ss="nasami">span</span>
+        <strong ss='test'>strong</strong>
+        <strong>strong</strong>
+        <span name='dfdf'>444</span>
+        <b name='test'>b</b>
+        <strong>strong</strong>
+    </p>
+</body>
+</html>

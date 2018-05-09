@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        div{height:100px;width:100px;background:yellow}
+    </style>
+</head>
+<body>
+    <div id='div'></div>
+    <button id='btn'>使用传统方式</button>
+</body>
+</html>
+<script>
+    var div = document.getElementById('div')
+    var btn = document.getElementById('btn')
+    btn.onclick = function(){
+        div.style.background = 'red'
+    }
+</script>

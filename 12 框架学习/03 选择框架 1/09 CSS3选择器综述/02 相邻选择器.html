@@ -1,0 +1,33 @@
+<!doctype html>
+<html dir="ltr" lang="zh-CN">
+<head>
+    <meta charset="utf-8"/>
+    <title>相邻选择器</title>
+    <style type="text/css">
+        span + strong {
+            background:red;
+        }
+    </style>
+    <script type="text/javascript" charset="utf-8">
+
+    </script>
+</head>
+<body>
+    <pre>
+        span + strong {
+        background:red;
+        }
+    </pre>
+    <p>
+        <strong>strong</strong>
+        <span>span</span>
+        <!--选择span的下一个-->
+        <strong>strong</strong>
+        <strong>strong</strong>
+        <span>444</span>
+        <strong>strong</strong>
+        <b>b</b>
+        <strong>strong</strong>
+    </p>
+</body>
+</html>

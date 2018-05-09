@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        div{
+            color:red;
+            font-size:40px;
+        }
+    </style>
+</head>
+<body>
+<div id='div'>少林寺</div>
+<div class='div'>少林寺</div>
+<div name='game'>少林寺</div>
+</body>
+</html>
+<script src='itcast.js'></script>
+<script src='sizzleme.js'></script>
+<script>
+
+    //id选择器
+    //    var doms = $get('#div')
+    //    doms[0].style.color='red'
+
+    //tag选择器
+    //    doms = $get('div')
+    //    doms[0].style.color='yellow'
+
+    //class选择器
+    //    doms = $get('.div')
+    //    doms[0].style.color='blue'
+
+    //    获取所有拥有name属性的元素
+    //    var doms = $get("[name]")
+    //    doms[0].style.color='blue'
+
+    //    获取所有属性值是game的元素
+    var doms = sizzle.$get("[name='game']")
+    doms[0].style.color='yellow'
+</script>
+
+

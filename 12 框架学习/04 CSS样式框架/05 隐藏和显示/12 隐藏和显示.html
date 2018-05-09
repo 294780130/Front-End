@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        div{
+            height:30px;
+            width:30px;
+            padding:30px;
+            color:blue;
+        }
+    </style>
+</head>
+<body>
+<div id='div'>传智播客</div>
+</body>
+</html>
+<script src='itcast.js'></script>
+<script>
+    hide('div')
+    function show(id){
+        var dom =  $$.$id(id)
+        $$.css(dom, 'display', 'block');
+    }
+
+    //隐藏和显示元素
+    function hide(id){
+        // var ani = animate || ICD.getAnimate();
+        var dom =  $$.$id(id)
+        $$.css(dom, 'display', 'none');
+    }
+
+</script>

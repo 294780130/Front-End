@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style type="text/css">
+div{position: absolute; right: 100px; top: 300px; padding: 10px; border: 1px solid red; background: pink; font-size: 18px; color: white; font-weight: bold; line-height: 20px; cursor: pointer;}
+body{height: 6000px;}
+</style>
+<body>
+	<div id="back">返回<br>顶部</div>
+</body>
+<script src='../09%20常用事件的法宝/ICD.js'></script>
+<script src='../09%20常用事件的法宝/jquery-1.11.2.min.js'></script>
+
+
+<script type="text/javascript">
+$(window).on('scroll', function(){
+	var top = window.scrollY || document.documentElement.scrollTop;
+	$('#back').css('top', top + 600 + 'px')
+});
+on('back', 'click', function(){
+	window.scrollTo(0,0);
+})
+</script>
+</html>

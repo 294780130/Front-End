@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>test</title>
+    <style type="text/css">
+        *
+        {
+            margin: 0 auto;
+        }
+        .father
+        {
+            width: 500px;
+            height: 750px;
+            border: 5px solid red;
+            float: left;
+        }
+        .son
+        {
+            width: 400px;
+            height: 300px;
+            border: 5px solid black;
+            margin: 20px;
+        }
+        .grandson
+        {
+            width: 150px;
+            height: 100px;
+            border: 5px solid blue;
+            margin: 20px;
+            overflow: auto;
+        }
+        .data
+        {
+            width: 600px;
+            height: 750px;
+            border: 5px solid red;
+            float: left;
+            margin-left: 15px;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function()
+        {
+            /*获取元素对象*/
+            var father = document.getElementById('father');
+            var son = document.getElementById('son');
+            var grandson = document.getElementById('grandson');
+            var data = document.getElementById('data');
+
+
+            data.innerHTML = "<h3>获取视窗大小(跟窗口大小有关)</h3>";
+            data.innerHTML += "document.body可见区域宽: "+document.body.clientWidth+"<br/>";
+            data.innerHTML += "document.body可见区域高: "+document.body.clientHeight+"<br/>";
+            data.innerHTML += "window.innerWidth可见区域宽: "+window.innerWidth+"<br/>";
+            data.innerHTML += "window.innerHeight可见区域高: "+window.innerHeight+"<br/>";
+            data.innerHTML += "document.documentElement可见区域宽: "+document.documentElement.clientWidth+"<br/>";
+            data.innerHTML += "document.documentElement可见区域高: "+document.documentElement.clientHeight+"<br/>";
+
+
+            data.innerHTML += "<h3>获取元素自身大小(跟是否有滚动条无关)</h3>";
+            data.innerHTML += ".son自身宽度(offsetWidth属性，包括左右边框)："+son.offsetWidth+"<br/>";
+            data.innerHTML += ".son自身高度(offsetHeight属性，包括上下边框)："+son.offsetHeight+"<br/>";
+            data.innerHTML += ".son可视宽度(clientWidth属性，不包括左右边框)："+son.clientWidth+"<br/>";
+            data.innerHTML += ".son可视高度(clientHeight属性，不包括上下边框)："+son.clientHeight+"<br/>";
+
+
+            data.innerHTML += "<h3>获取.grandson滚动大小和可视大小</h3>";
+            data.innerHTML += ".grandson滚动宽度(scrollWidth属性)："+grandson.scrollWidth+"<br/>";
+            data.innerHTML += ".grandson滚动高度(scrollHeight属性)："+grandson.scrollHeight+"<br/>";
+            data.innerHTML += ".grandson可视宽度(clientWidth属性，不包括竖直滚动条和border)："+grandson.clientWidth+"<br/>";
+            data.innerHTML += ".grandson可视高度(clientHeight属性，不包括水平滚动条和border)："+grandson.clientHeight+"<br/>";
+
+
+            data.innerHTML += "<h3>获取.grandson被卷去的大小(跟滚动条的位置有关)</h3>";
+            data.innerHTML += ".grandson被卷去的高(scrollTop属性，竖直滚动条滑到最底端)："+grandson.scrollTop+"<br/>";
+            data.innerHTML += ".grandson被卷去的左(scrollLeft属性，水平滚动条滑到最右端)："+grandson.scrollLeft+"<br/>";
+
+
+            data.innerHTML += "<h3>获取浏览器窗口位置(跟窗口大小有关)</h3>";
+            /*
+             *IE、Chrome、Safari、Opera 都提供了支持 window.screenLeft 和 *window.screenTop，但是Firxfox不支持这个两个属性；
+             *Firxfox、Chrome、Safari、Opera 都提供了支持 window.screenX *和 window.screenY，但是 IE 不支持这个两个属性；
+             */
+            var leftPos = (typeof window.screenLeft == 'number')?window.screenLeft:window.screenX;
+            var topPos = (typeof window.screenTop == 'number')?window.screenTop:window.screenY;
+            data.innerHTML += "body网页正文部分上(window.screenTop(Y))："+ topPos+"<br/>";
+            data.innerHTML += "body网页正文部分左(window.screenLeft(X))："+ leftPos+"<br/>";
+            data.innerHTML += "<h3>获取屏幕分辨率</h3>";
+            data.innerHTML += "屏幕分辨率的高(window.screen.height)："+ window.screen.height+"<br/>";
+            data.innerHTML += "屏幕分辨率的宽(window.screen.width)："+ window.screen.width+"<br/>";
+            data.innerHTML += "<h3>获取屏幕可用的高宽</h3>";
+            data.innerHTML += "屏幕分辨率的高(window.screen.availHeight)："+ window.screen.availHeight+"<br/>";
+            data.innerHTML += "屏幕分辨率的宽(window.screen.availWidth)："+ window.screen.availWidth+"<br/>";
+            data.innerHTML += "<h3>获取.father的边框大小</h3>";
+            data.innerHTML += ".father上边框(clientTop)："+ father.clientTop+"<br/>";
+            data.innerHTML += ".father左边框(clientLeft)："+ father.clientLeft+"<br/>";
+            data.innerHTML += "<h3>获取.son到父元素边界的距离(即对应margin+父元素对应的border)</h3>";
+            data.innerHTML += ".son到父元素上边界(offsetTop)："+ son.offsetTop+"<br/>";
+            data.innerHTML += ".son到父元素左边界(offsetLeft)："+ son.offsetLeft+"<br/>";
+        }
+    </script>
+</head>
+<body>
+<div class="father" id="father">
+    <h3>这是父元素，屏幕分辨率是1366*768</h3>
+    <div class="son" id="son">
+        <h3>这是子元素，祝大家国庆快乐 </h3>
+        <div class="grandson" id="grandson">
+            <h3>这是孙子元素，祝大家国庆快乐 </h3>
+            <h3>我的博客:www.jb51.net</h3>
+            <h3>程序爱好者QQ群:</h3>
+            <h3>259280570 </h3>
+            <h3>欢迎你加入 </h3>
+            <h3>国庆快乐 </h3>
+        </div>
+    </div>
+</div>
+<div class="data">
+    <h3>数据输出</h3>
+    <div id="data"></div>
+</div>
+</body>
+</html>

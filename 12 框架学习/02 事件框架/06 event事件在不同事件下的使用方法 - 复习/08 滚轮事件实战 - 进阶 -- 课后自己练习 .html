@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style type="text/css">
+	*{margin: 0; padding: 0;}
+	#show{width: 600px; height: 400px; display: block; margin: 100px auto 0;}
+	div{position: absolute; width: 120px; top: 150px; right: 50px;}
+	div img{width: 100px; margin-left: 10px;}
+	.choose{width: 120px; margin-left: 0;}
+</style>
+<body id='body'>
+<img id="show" src="img/1.jpg">
+<div id="container">
+	<img src="img/1.jpg" alt="" class="choose">
+	<img src="img/2.jpg" alt="">
+	<img src="img/3.jpg" alt="">
+	<img src="img/4.jpg" alt="">
+</div>
+</body>
+<script type="text/javascript" src="../09%20常用事件的法宝/jquery-1.11.2.min.js"></script>
+
+<script type="text/javascript">
+
+	function on(id, type, fn){
+		var dom = document.getElementById(id);
+		//如果支持
+		//W3C版本 --火狐 谷歌 等大多数浏览器
+		//如果你想检测对象是否支持某个属性，方法，可以通过这种方式
+		if(dom.addEventListener ){
+			dom.addEventListener(type, fn, false);
+		}else if(dom.attachEvent){
+			//如果支持 --IE
+			//
+			dom.attachEvent('on' + type, fn);
+		}
+	}
+
+	function un(id, type, fn){
+		var dom = document.getElementById(id);
+		if(dom.removeEventListener){
+			dom.removeEventListener(type, fn);
+		}else if(dom.detachEvent){
+			dom.detachEvent(type, fn);
+		}
+	}
+
+	// 获取事件对象
+	function getEvent(event){
+		return event ? event : window.event;
+	}
+	// 获取元素
+	function getTarget(event){
+		var event = getEvent(event);
+		return event.target || event.srcElement;
+	}
+	// 阻止冒泡以及捕获
+	function stopPropagation(event){
+		var event = getEvent(event);
+		if(event.stopPropagation){
+			event.stopPropagation();
+		}else{
+			event.cancelBubble = true;
+		}
+	}
+	// 阻止默认行为
+	function preventDefault(event){
+		var event = getEvent(event);
+		if(event.preventDefault){
+			event.preventDefault();
+		}else{
+			event.returnValue = false;
+		}
+	}
+	function getDetail(event){
+		var event = getEvent(event);
+		if(event.wheelDelta){
+			return event.wheelDelta;
+		}else{
+			return -event.detail * 40;
+		}
+	}
+
+	var num = 0;
+	function changeImage(e){
+		var speed = -getDetail(e) / 120;
+		num = (num + speed) % 4;
+		//console.log(speed);
+		console.log(num);
+		if(num < 0){
+			num = 4 + num;
+		}
+		$("#show").attr('src', 'img/' + (num + 1) + '.jpg')
+//	ICD.dom.attr('show', 'src', 'img/' + (num + 1) + '.jpg');
+		//获取所有的img
+		var img = $('#container img'),
+				len = img.length;
+		for(var i = 0; i < len; i++){
+			if(i == num){
+				$('#container img')[i].className = 'choose';
+			}else{
+				$('#container img')[i].className = '';
+			}
+		}
+	}
+
+
+	on('body', 'mousewheel', changeImage);
+	on('body', 'DOMMouseScroll', changeImage);
+
+</script>
+</html>

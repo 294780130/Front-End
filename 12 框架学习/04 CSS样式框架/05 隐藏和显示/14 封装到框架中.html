@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        div{
+            height:30px;
+            padding:30px;
+            color:blue;
+            font-size:50px
+        }
+    </style>
+</head>
+<body>
+<div class='div'>传智播客</div>
+<div class='div'>传智播客</div>
+<div class='div'>传智播客</div>
+<div class='div'>传智播客</div>
+<button id='hide'>隐藏</button>
+<button id='show'>显示</button>
+</body>
+</html>
+<script src='../itcast.js'></script>
+<script>
+    $$.on('hide','click',function(){
+        $$.hide('.div')
+    })
+
+    $$.on('show','click',function(){
+        $$.show('.div')
+    })
+
+
+</script>

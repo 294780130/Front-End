@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <style type="text/css">
+        /*所有包含title的属性都设置为红色*/
+        [title]
+        {
+            color:red;
+        }
+        /*所有包含href属性的a标签*/
+        a[href]
+        {
+            color:blue
+        }
+        /*包含多属性啊标签*/
+        a[href][title]
+        {
+            color:orange;
+        }
+
+        /*属性值等于XXXX的a标签*/
+        p[title="梦幻西游"] {color: yellow;}
+
+
+        /*根据部分属性 也就是空格隔开，包含部分属性*/
+        p[class~="important"]
+        {
+            color: black;
+        }
+
+
+
+        /*CSS3新增的*/
+        /**表示包含传智播客的*/
+        p[title*="传智播客"] {color:red}
+        /*$表示以传智播客结尾的*/
+        p[title$="传智播客"] {color:green}
+        /*^表示以传智播客开头的*/
+        p[title^="传智播客"] {color:blue}
+
+
+        /*伪类*/
+
+
+
+    </style>
+</head>
+
+<body>
+<h3>所有包含title的属性都设置为红色</h3>
+<h2 title="英雄联盟">英雄联盟</h2>
+<h2 title="英雄联盟">英雄联盟</h2>
+<h2 title="英雄联盟">英雄联盟</h2>
+
+
+<hr />
+<h3>所有包含href属性的a标签</h3>
+<a  href="">魔兽世界</a>
+<a  href="">魔兽世界</a>
+<a  href="">魔兽世界</a>
+
+
+<hr />
+<h3>包含多属性啊标签</h3>
+<a title="英雄联盟"  href="">魔兽世界</a>
+<a title="英雄联盟"  href="">魔兽世界</a>
+<a title="英雄联盟"  href="">魔兽世界</a>
+
+
+<hr />
+<h3>属性值等于XXXX的a标签</h3>
+<p title="梦幻西游"  href="">魔兽世界</p>
+<p title="梦幻西游"  href="">魔兽世界</p>
+<p title="梦幻西游"  href="">魔兽世界</p>
+
+
+<br />
+<h3>根据部分属性 也就是空格隔开，包含部分属性</h3>
+<p class="important warning">大话西游</p>
+<p class="important warning">大话西游</p>
+<p class="important warning">大话西游</p>
+
+
+<br />
+<h3>CSS3</h3>
+<p title="XXXXXXXXX传智播客XXXXXXX">大话西游</p>
+<p title="传智播客XXXXXXXXXXXXXXXX">大话西游</p>
+<p title="XXXXXXXXXXXXXXXX传智播客">大话西游</p>
+
+
+
+
+</body>
+</html>

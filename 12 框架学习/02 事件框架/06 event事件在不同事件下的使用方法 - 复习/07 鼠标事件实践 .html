@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style type="text/css">
+*{margin : 0; padding: 0;}
+#move{float: left; width: 300px; height: 200px; overflow: hidden; position: relative;}
+#shadow{height: 40px; width: 60px; position: absolute; top: 0; left: 0; background: rgba(200, 200, 200, 0.5); cursor: pointer;}
+.container{width: 600px; height: 400px; float: left; overflow: hidden; position: relative;}
+#big{position: absolute; top: 0; left: 0;}
+</style>
+<body>
+<div id="move">
+	<img id="small" width="300" height="200" src="img/mouse.jpg">
+	<div id="shadow"></div>
+</div>
+<div class="container">
+	<img id="big" width="3000" height="2000" src="img/mouse.jpg">
+</div>
+</body>
+<script type="text/javascript" src="../09%20常用事件的法宝/ICD.js"></script>
+<script src='../09%20常用事件的法宝/jquery-1.11.2.min.js'></script>
+<script type="text/javascript">
+// 窗口位置：clientX，页面位置：pageX 或 clientX + document.body.scrollLeft || document.documentElement.scrollLeft
+on('move', 'mousemove', function(e){
+	var e = getEvent(e),
+		x = e.clientX,
+		y = e.clientY;
+	if(x < 0){
+		x = 0;
+	}else if(x > 300){
+		x = 300;
+	}
+	if(y < 0){
+		y = 0;
+	}else if(y > 200){
+		y = 200;
+	}
+	//初始化的时候 两个图 -- 一个大图 一个小图,  大图是小图的10倍
+	//每当鼠标移动的获取获取shadow的坐标位置
+	$('#shadow').css( 'left', x + 'px');
+	$('#shadow').css( 'top', y + 'px');
+	//当我鼠标向下走的时候,图片向上走才能看到
+	//当我鼠标向右滑动的时候,图片必须向左移动才能看到,所以正好相反,用负数
+	$('#big').css('left', -x * 10 + 'px');
+	$('#big').css('top', -y * 10 + 'px');
+})
+</script>
+</html>

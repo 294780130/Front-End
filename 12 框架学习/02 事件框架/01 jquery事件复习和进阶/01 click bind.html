@@ -1,0 +1,59 @@
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        p{font-size:20px}
+    </style>
+    <script src='jquery-1.11.2.min.js'></script>
+</head>
+<body>
+<div>
+    <button id="btn1">添加新的p元素</button>
+    <button id="btn2">添加新的H3元素</button>
+
+
+    <p>第一个p元素</p>
+    <p>第二个p元素</p>
+    <p>第三个p元素</p>
+    <p>第四个p元素</p>
+    <p>第五个p元素</p>
+
+    <h3>第二个p元素</h3>
+    <h3>第三个p元素</h3>
+    <h3>第四个p元素</h3>
+    <h3>第五个p元素</h3>
+</div>
+
+<script>
+    $("#btn1").click(function(){
+        $("div").append("<p>这是一个新的p元素</p>");
+    });
+    $("#btn2").click(function(){
+        $("div").append("<h3>这是一个新的h3元素</h3>");
+    });
+
+    //给多个元素绑定事件
+    //但是新增的元素不行
+    $("div p").each(function(){
+        $(this).click(function(){
+            $(this).css('color','green')
+        })
+    })
+
+
+    //我们可以使用bind来打到同样的目的
+    //新的元素也不行
+    $("div h3").bind("click", function () {
+        $(this).css('color','green')
+    })
+
+    //还可以绑定多个
+    $("div h3").bind("click", function () {
+        $(this).css('background','yellow')
+    })
+
+</script>
+
+</body>
+</html>

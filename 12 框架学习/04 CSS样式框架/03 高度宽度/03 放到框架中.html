@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        div{
+            height:400px;
+            width:500px;
+            background:green;
+            padding:10px;
+            border:5px;
+        }
+        #child{
+            height:200px;
+            width:200px;
+            background:yellow;
+            padding:10px;
+            magin:20px;
+            border:5px;
+        }
+        #div3{
+            background:yellow;
+            overflow:scroll;
+        }
+    </style>
+</head>
+<body>
+<div id="div">
+    <div id="child"></div>
+</div>
+
+<div id="div3">
+    11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+</div>
+
+
+</body>
+</html>
+<script src='itcast.js'></script>
+<script>
+    console.log('父亲')
+    console.log($$.Width('div'))
+    console.log($$.Height('div'))
+
+
+    console.log('儿子')
+    console.log($$.Width('child'))
+    console.log($$.Height('child'))
+
+
+    console.log('第三个元素')
+    console.log($$.Width('div3'))
+    console.log($$.Height('div3'))
+    console.log('含有滚动条的高度和宽度')
+    console.log($$.scrollWidth('div3'))
+    console.log($$.scrollHeight('div3'))
+    console.log('含有滚动条时候偏移量')
+    console.log($$.scrollTop('div3'))
+    console.log($$.scrollLeft('div3'))
+
+</script>

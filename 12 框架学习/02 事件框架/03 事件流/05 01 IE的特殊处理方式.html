@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+    <style>
+    	p{height:300px;width:300px;background:#F00}
+    </style>
+</head>
+<body>
+	<button>按钮</button>
+	<button>第二个按钮</button>
+	<p></p>
+</body>
+<script type="text/javascript">
+var btn = document.getElementsByTagName('button')[0];
+var btn1 = document.getElementsByTagName('button')[1];
+var p = document.getElementsByTagName('p')[0];
+
+//IE绑定事件
+btn.attachEvent('onclick', function(){
+	p.innerHTML += '神仙<br/>';
+});
+
+
+function addEvent1(){
+p.innerHTML += '田佩瑶<br/>';
+}
+
+function addEvent2(){
+	p.innerHTML += '姜昭灿<br/>';
+}
+
+
+btn.attachEvent('onclick', addEvent1);
+
+btn.attachEvent('onclick', addEvent2);
+
+//解除绑定
+//btn.detachEvent('onclick', addEvent2);
+
+
+
+
+
+
+//false 表示使用冒泡方式
+//btn.addEventListener('click',function(){
+//	  p.innerHTML += '点击按钮触发第1个事件<br/>';
+//	
+//},false);
+//
+//btn.addEventListener('click',function(){
+//	  p.innerHTML += '点击按钮触发第2个事件<br/>';
+//	
+//},false);
+//
+//
+////演示解除绑定事件
+//function addClickEvent1(){
+//	p.innerHTML += '点击第二个按钮触发第一个事件<br/>';
+//}
+//function addClickEvent2(){
+//	p.innerHTML += '点击第二个按钮触发第二个事件<br/>';
+//}
+//
+//btn1.addEventListener('click', addClickEvent1, false);
+//btn1.addEventListener('click', addClickEvent2, false);
+//btn1.removeEventListener('click', addClickEvent2, false);
+//
+//
+
+//btn.addEventListener('click', function(){
+//	p.innerHTML += '点击按钮触发第一个事件<br/>';
+//}, false);
+//btn.addEventListener('click', function(){
+//	p.innerHTML += '点击按钮触发第二个事件<br/>';
+//}, false);
+//btn.addEventListener('click', function(){
+//	p.innerHTML += '点击按钮触发第三个事件<br/>';
+//}, true);
+//
+
+//btn1.addEventListener('click', addClickEvent1, false);
+//btn1.addEventListener('click', addClickEvent1, false);
+//btn1.addEventListener('click', addClickEvent2, false);
+//btn1.removeEventListener('click', addClickEvent2, false);
+</script>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div></div>
+</body>
+</html>
+<script src='../itcast.js'></script>
+<script>
+
+    $$.cache.add('nav','传智播客')
+    $$.cache.add('tab','笑傲江湖')
+    console.log($$.cache.get('nav'))
+    console.log($$.cache.get('tab'))
+    $$.cache.update('nav','黑马程序员')
+    console.log($$.cache.get('nav'))
+
+
+    //json和字符串转换
+    var json = {key:1,value:1}
+    var sjson = $$.sjson(json)
+    console.log($$.json(json))
+    console.log(sjson)
+</script>

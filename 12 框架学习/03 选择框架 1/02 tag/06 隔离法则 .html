@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+	span{padding:10px;margin:20px;color:yellow}
+</style>
+    <script src = itcast.js></script>
+</head>
+
+<body>
+<div id='mydiv'>
+    <span id='span'>点击我变成蓝色</span>
+    <span id='span2'>点击我变成蓝色</span>
+    <span id='span3'>点击我变成蓝色</span>
+    <span id='span4'>点击我变成蓝色</span>
+</div>
+</body>
+</html>
+<script>
+
+  var spans = $tag('mydiv','span');
+  for(var i=0;i<spans.length;i++){
+	      spans[i].onclick = function(){
+			     this.style.background= 'blue';
+			  
+			  }
+	  }
+
+  function $tag(context,tag){
+
+	/*隔离法则： 我们可以函数看出多个模块，其中后面的模块需要用到某个对象变量
+		   那么我们可以用隔离法则将代码分成两个部分，
+		   第一部分，专门为第二部分服务
+		   就是将两个部门看成两个函数
+		   第一步：获取返回 如果是字符串转换成dom,如果是dom不做处理
+		   按照完美法则，有的同学说，如果用户输入了非法的id，那么程序还是不怎么完美。。。
+		   这里补充，我们不是用户掩盖错误，而是帮用户发现错误，如果用户因为粗心输入了错误
+		   那么当然直接返回*/
+
+
+	  /*第一步：获取dom*/
+      var dom = getdom(context)
+	  /*第二步：获取元素*/
+      var elements = getElements(dom,tag)
+      return elements;
+      function getdom(context){
+            var dom;
+            if(typeof context == 'string'){
+                dom = $$.$id(context);
+            }
+            return dom;
+        }
+      function getElements(context,tag){
+          var elements;
+          if(context){
+              elements =  context.getElementsByTagName(tag);
+          }else{
+              elements =  document.getElementsByTagName(tag);
+          }
+          return elements;
+      }
+  }
+
+  function $tag2(context,tag){
+      if(typeof context == 'string'){
+          context = $$.$id(context);
+      }
+      if(context){
+          return context.getElementsByTagName(tag);
+      }else{
+          return document.getElementsByTagName(tag);
+      }
+  }
+</script>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style type="text/css">
+	span{padding: 10px; margin: 0 10px; background: pink; border: 1px solid red; color: #333;}
+</style>
+<body>
+<span>click</span>
+<span>dblclick</span>
+<span>mousedown</span>
+<span>mouseup</span>
+<span>mouseover</span>
+<span>mouseout</span>
+<span>mousemove</span>
+<span>mouseenter</span>
+<span>mouseleave</span>
+<p></p>
+</body>
+<script type="text/javascript" src="../09%20常用事件的法宝/ICD.js"></script>
+<script type="text/javascript">
+var spans = ICD.dom.q('span');
+var num = 0;
+function eventMessage(msg){
+	++num;
+	ICD.dom.q('p')[0].innerHTML = '事件类别为：' + msg + ' num:' + num;;
+}
+ICD.event.on(spans[0], 'click', function(){
+	eventMessage('click');
+});
+ICD.event.on(spans[1], 'dblclick', function(){
+	eventMessage('dblclick');
+});
+ICD.event.on(spans[2], 'mousedown', function(){
+	eventMessage('mousedown');
+});
+ICD.event.on(spans[3], 'mouseup', function(){
+	eventMessage('mouseup');
+});
+ICD.event.on(spans[4], 'mouseover', function(){
+	eventMessage('mouseover');
+});
+ICD.event.on(spans[5], 'mouseout', function(){
+	eventMessage('mouseout');
+});
+ICD.event.on(spans[6], 'mousemove', function(){
+	eventMessage('mousemove');
+});
+ICD.event.on(spans[7], 'mouseenter', function(){
+	eventMessage('mouseenter');
+});
+ICD.event.on(spans[8], 'mouseleave', function(){
+	eventMessage('mouseleave');
+});
+</script>
+</html>

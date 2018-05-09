@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        p{
+            background:red;
+            font-size:40px;
+        }
+    </style>
+</head>
+<body>
+<div id="container">
+    <p>英雄联盟</p>
+    <p>梦幻西游</p>
+</div>
+
+<script src='itcast.js'></script>
+<script type="text/javascript">
+
+    //设置
+    $$.css('p','color','yellow')
+    $$.css('p','opacity','0.2')
+
+
+
+    //获取数组 --带个px ，如果我只想得到数字怎么办
+    console.log($$.css('p','width'))
+    console.log($$.css('p','opacity'))
+
+    //    复习内置的函数用法
+    //    parseFloat() 函数可解析一个字符串，并返回一个浮点数。
+    //    该函数指定字符串中的首个字符是否是数字。
+    //    如果是，则对字符串进行解析，直到到达数字的末端为止，然后以数字返回该数字，而不是作为字符串。
+    function cssNum(context, key){
+        return parseFloat($$.css(context, key))
+    }
+
+    console.log(cssNum('p','width'))
+    console.log(cssNum('p','opacity'))
+</script>
+</body>
+</html>

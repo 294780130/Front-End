@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .div{
+            color:yellow;
+            background:red;
+            font-size:50px;
+            text-align:center
+        }
+    </style>
+</head>
+<body>
+<script src='zepto.js'></script>
+<div id='div' class='div'>魔兽世界</div>
+</body>
+</html>
+<script>
+//    jquery的选择框架使用sizzle引擎，而zepto选择框架使用浏览器内置引擎
+    var div = $('#div');
+    div.on('click', function (e) {
+        e.target.innerHTML='笑傲江湖<br>'
+    });
+    div.on('click', function (e) {
+        e.target.innerHTML+='射雕英雄传<br>'
+    });
+
+    div.on('click', function (e) {
+        e.target.innerHTML+='射雕英雄传<br>'
+    });
+
+//    解除事件
+    div.off('click');
+
+//    elem.on('click', 'nav a', function (e) {
+//        //...
+//    });
+//    $(document).on('click', 'a', function (e) {
+//        //...
+//    });
+//    $(document).on('click', 'nav a', false);
+//    // 上面的简写形式
+//    $("a.disabled").on("click", function () {
+//        return false;
+//    });
+</script>

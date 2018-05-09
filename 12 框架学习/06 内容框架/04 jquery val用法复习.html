@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<!--普通标签-->
+<p>传智播客</p>
+
+<br>
+
+<!--form表单元素-->
+<!--文本框 密码框-->
+<input type="text" id="test" value="val()方法的用法" />
+
+<br>
+
+<!--下来菜单 单选-->
+<select id="fruit">
+    <option>香蕉</option>
+    <option>菠萝</option>
+</select>
+
+<br>
+
+<!--下拉菜单 多选-->
+<select id="vage" multiple="multiple">
+    <option selected="selected">番茄</option>
+    <option>黄瓜</option>
+    <option selected="selected">西蓝花</option>
+</select>
+
+<br>
+<!--checkbox-->
+<input type="checkbox" name="checkboxname" value="check1"> 水浒传
+
+<br>
+
+<!--radio-->
+<input type="radio" name="r" value="radio1"> radio1
+<input type="radio" name="r" value="radio2"> radio2
+
+
+</body>
+</html>
+<script src='jquery-1.11.2.min.js'></script>
+<script>
+    //基本用法 设置
+    $("p").val("Hello world!");
+    //基本用法 获取
+    console.log($("#test").val());
+
+    //单选框
+    console.log($("#fruit").val());
+    $( "#fruit" ).val( "芒果" );
+
+    //多选框
+    console.log($("#vage").val())
+    $( "#vage" ).val([ "土豆", "西葫芦" ]);
+
+    //checkbox
+    $( "input[name='checkboxname']").val([ "三国演义", "水浒传", "红楼梦" ]);
+
+</script>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        div{
+            color:red;
+            font-size:50px;
+        }
+        .hide{display: none}
+        .show{display: block}
+    </style>
+</head>
+<body>
+<div class='div'>传智播客</div>
+<div class='div'>传智播客</div>
+<div class='div'>传智播客</div>
+<div class='div'>传智播客</div>
+<div class='div'>传智播客</div>
+<button id='show'>显示</button>
+<button id='hide'>隐藏</button>
+</body>
+</html>
+<script src='itcast.js'></script>
+<script>
+
+    $$.$id('show').onclick=function(){
+        removeClass('.div','hide')
+    }
+    $$.$id('hide').onclick=function(){
+        addClass('.div','hide')
+    }
+
+    console.log(hasClass())
+
+
+    //动态添加和移除class
+    function addClass(context, name){
+        var doms = $$.$all(context);
+        //如果获取的是集合
+        if(doms.length){
+            for(var i= 0,len=doms.length;i<len;i++){
+                addName(doms[i]);
+            }
+        //如果获取的不是集合
+        }else{
+            addName(doms);
+        }
+        function addName(dom){
+            dom.className = dom.className + ' ' + name;
+        }
+    }
+
+    function removeClass(context, name){
+        var doms = $$.$all(context);
+        if(doms.length){
+            for(var i= 0,len=doms.length;i<len;i++){
+                removeName(doms[i]);
+            }
+        }else{
+            removeName(doms);
+        }
+        function removeName(dom){
+            dom.className = dom.className.replace(name, '');
+        }
+    }
+
+
+</script>

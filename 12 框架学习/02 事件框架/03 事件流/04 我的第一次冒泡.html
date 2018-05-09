@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <style>
+
+        div{background:#F00;height:300px;width:300px}
+    </style>
+    <script src='jquery-1.11.2.min.js'></script>
+</head>
+
+<body>
+<button id='btn2'>传统方式</button>
+<button id='btn'>确认</button>
+
+<div id='div2'></div>
+
+<div id='div'></div>
+</body>
+</html>
+
+<script>
+    //传统方式
+    var btn2 = document.getElementById('btn2');
+    var div2  = document.getElementById('div2');
+
+    //新的方式
+    var btn = document.getElementById('btn');
+    var div  = document.getElementById('div');
+
+
+
+    	btn2.onclick = function()
+    	{
+            div2.innerHTML+='传统方式1';
+    	}
+
+    	btn2.onclick = function()
+    	{
+            div2.innerHTML+='传统方式2';
+    	}
+
+
+    //标准体系
+//    事件类型  type  ---事件类型 -- click mousedown foucs
+    btn.addEventListener('click',fn1,false);
+    btn.addEventListener('click',fn2,false);
+    btn.addEventListener('click',fn3,false);
+    //三个参数--和传统的区别：没有了on，fn1和DOM0一样，
+    //如果false ：冒泡
+    //如果是true：捕获
+     addEventListener()
+    function fn1()
+    {
+        div.innerHTML+='当前元素:1';
+    }
+    function fn2()
+    {
+        div.innerHTML+='当前元素:2';
+    }
+    function fn3()
+    {
+        div.innerHTML+='当前元素:3';
+    }
+
+
+
+</script>

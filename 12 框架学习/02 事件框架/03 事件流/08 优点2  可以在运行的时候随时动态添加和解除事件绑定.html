@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <style>
+
+        div{background:#F00;height:300px;width:300px}
+    </style>
+    <script src='jquery-1.11.2.min.js'></script>
+</head>
+
+<body>
+<button id='btn2'>传统方式</button>
+<button id='btn'>事件流方式</button>
+
+
+<div id='div'></div>
+</body>
+</html>
+
+<script>
+    var div  = document.getElementById('div');
+
+    //传统方式
+    var btn2 = document.getElementById('btn2');
+
+    //新的方式
+    var btn = document.getElementById('btn');
+
+
+    btn2.onclick = function() {
+            div.innerHTML+='传统方式1';
+    }
+        //只能覆盖，以最后定义的为准
+    btn2.onclick = function() {
+            div.innerHTML+='传统方式2';
+    }
+
+
+    //标准体系 - 优点：可以绑定多个方法
+    btn.addEventListener('click',fn1,false);
+    btn.addEventListener('click',fn2,false);
+    btn.addEventListener('click',fn3,false);
+    var shanghai=1000;
+    function fn1()
+    {
+        div.innerHTML+='当前元素:1';
+        shanghai+=1000;
+    }
+    function fn2()
+    {
+        div.innerHTML+='当前元素:2';
+        shanghai+=2000;
+    }
+
+    function fn3()
+    {
+        div.innerHTML+='当前元素:3';
+        shanghai+=2000;
+    }
+
+    btn.removeEventListener('click', fn3, false);
+    btn.removeEventListener('click',fn2,false)
+    btn.addEventListener('click',fn2,false)
+
+</script>

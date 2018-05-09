@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        p{
+            background:red;
+            font-size:40px;
+        }
+    </style>
+</head>
+<body>
+<div id="container">
+    <p>英雄联盟</p>
+    <p>梦幻西游</p>
+</div>
+
+<script src='../itcast.js'></script>
+<script type="text/javascript">
+
+    //设置
+    css('p','color','yellow')
+    css('p','opacity','0.2')
+    //获取
+    console.log(css('p','color'))
+    console.log(css('p','height'))
+    console.log(css('p','width'))
+    console.log(css('p','top'))
+    console.log(css('p','left'))
+
+    //设置元素的样式属性 css（'test'，'color','red'）；
+    //该函数包含两个功能：
+    // 1获取id为id元素的样式值 比如 高度 100 透明度0.5 宽度30，
+    // 2如果value不为空则表示设置样式的值，比如高度100
+    function css(context, key, value){
+        var dom = $$.isString(context)?$$.$all(context) : context;
+//        如果是数组
+        if(dom.length){
+            //先骨架骨架 -- 如果是获取模式 -- 如果是设置模式
+//            如果value不为空，则表示设置
+            if(value){
+                for(var i = dom.length - 1; i >= 0; i--){
+                    setStyle(dom[i],key, value);
+                }
+ //            如果value为空，则表示获取
+            }else{
+                return getStyle(dom[0]);
+            }
+//            如果不是数组
+        }else{
+            if(value){
+                setStyle(dom,key, value);
+            }else{
+                return getStyle(dom);
+            }
+        }
+        function getStyle(dom){
+            if(dom.currentStyle){
+                return dom.currentStyle[key];
+            }else{
+                return getComputedStyle(dom,null)[key];
+            }
+        }
+        function setStyle(dom,key,value){
+            dom.style[key] = value;
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=" utf-8">
+    <meta name="author" content="http://www.jb51.net/" />
+    <title>position()函数-脚本之家</title>
+    <style type="text/css">
+        *{
+            margin:0px;
+            padding:0px;
+        }
+        .father{
+            background-color:green;
+            width:200px;
+            height:200px;
+            padding:50px;
+            margin-bottom:50px;
+            margin-left:100px;
+        }
+        .children{
+            height:150px;
+            width:150px;
+            background-color:red;
+            line-height:150px;
+            text-align:center;
+        }
+    </style>
+
+</head>
+<body>
+<!-- 如果父辈元素中没有采用定位的（position属性值为relative、absolute或者fixed），那么偏移量参考对象为窗口。-->
+<div class="father">
+    <div class="children"></div>
+</div>
+
+<!--如果父辈元素中有采用定位的，那么偏移量的参考对象为距离它最近的采用定位的元素.-->
+<div class="father" style="position:relative">
+    <div class="children"></div>
+</div>
+
+</body>
+</html>
+
+<script type="text/javascript" src="../jquery-1.11.2.min.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function(){
+        $(".children").each(function(){
+            var text;
+            text="left:"+$(this).position().left;
+            text+="top:"+$(this).position().top;
+            $(this).text(text);
+        })
+    })
+</script>
