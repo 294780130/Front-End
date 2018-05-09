@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<!-- saved from url=(0044)http://www.w3cplus.com/sassguide/syntax.html -->
+<html lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="keywords" content="sass中文,sass教程,sass官网">
+<meta name="description" content="sass guide是sass的中文入门教程，教程包括了sass的语法，sass安装，sass解析，sass调试等。"><title>sass语法</title>
+<link rel="stylesheet" type="text/css" href="./sass语法_files/global.css">
+<link rel="stylesheet" type="text/css" href="./sass语法_files/ir_black.css">
+<script src="./sass语法_files/hm.js"></script><script src="./sass语法_files/highlight.pack.js"></script><!-- w3cplus.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?177319b798978621f83845b12c86fa29";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<meta name="chromesniffer" id="chromesniffer_meta" content="{}"><script type="text/javascript" src="chrome-extension://homgcnaoacgigpkkljjjekpignblkeae/detector.js"></script></head>
+<body>
+<div class="page page-syntax">
+    <div class="wrap-top-bar">
+  <div id="top_bar">
+      <ul id="top_nav">
+        <li><a href="http://www.w3cplus.com/sassguide/syntax.html">sass语法</a></li>
+        <li><a href="http://www.w3cplus.com/sassguide/install.html">sass安装</a></li>
+        <li><a href="http://www.w3cplus.com/sassguide/index.html">Sass Guide</a></li>
+        <li><a href="http://www.w3cplus.com/sassguide/compile.html">sass编译</a></li>
+        <li><a href="http://www.w3cplus.com/sassguide/debug.html">sass调试</a></li>
+      </ul>
+  </div><!--top_bar-->
+</div>  
+ 
+    <div class="wrap-container">
+        <div id="container" class="clearfix">
+            <div id="main">
+<div id="syntax_page" class="article">
+
+<h1>sass语法</h1>
+<p>关于sass 3.3.0更新说明——<a href="http://sass-lang.com/documentation/file.SASS_CHANGELOG.html#330_7_march_2014">3.3.0</a></p>
+<p>sublime相关插件为：<a href="https://github.com/MarioRicalde/SCSS.tmbundle" target="_blank">scss语法高亮</a>，<a href="https://github.com/nathos/sass-textmate-bundle" target="_blank">sass语法高亮</a>，<a href="https://github.com/jaumefontal/SASS-Build-SublimeText2" target="_blank">编译</a>，<a href="https://github.com/alexnj/SublimeOnSaveBuild" target="_blank">保存即编译</a>，<a href="https://github.com/badsyntax/SassBeautify" target="_blank">格式化</a></p>
+<h2>文件后缀名</h2>
+<p>sass有两种后缀名文件：一种后缀名为sass，不使用大括号和分号；另一种就是我们这里使用的scss文件，这种和我们平时写的css文件格式差不多，使用大括号和分号。而本教程中所说的所有sass文件都指后缀名为scss的文件。在此也建议使用后缀名为scss的文件，以避免sass后缀名的严格格式要求报错。</p>
+<pre><code class="scss"><span class="comment">//文件后缀名为sass的语法</span>
+<span class="tag">body</span>
+  <span class="attribute">background</span><span class="value">: <span class="hexcolor">#eee</span>
+  font-size:<span class="number">12</span>px
+p
+  background: <span class="hexcolor">#0982c1</span>
+
+//文件后缀名为scss的语法  
+body {
+  background: <span class="hexcolor">#eee</span>;</span>
+  <span class="attribute">font-size</span><span class="value">:<span class="number">12</span>px;</span>
+}
+<span class="tag">p</span>{
+  <span class="attribute">background</span><span class="value">: <span class="hexcolor">#0982c1</span>;</span>
+} 
+</code></pre>
+
+<h2>导入</h2>
+<p>sass的导入(<code>@import</code>)规则和CSS的有所不同，编译时会将<code>@import</code>的scss文件合并进来只生成一个CSS文件。但是如果你在sass文件中导入css文件如<code>@import 'reset.css'</code>，那效果跟普通CSS导入样式文件一样，导入的css文件不会合并到编译后的文件中，而是以<code>@import</code>方式存在。</p>
+<p>所有的sass导入文件都可以忽略后缀名<code>.scss</code>。一般来说基础的文件命名方法以_开头，如<code>_mixin.scss</code>。这种文件在导入的时候可以不写下划线，可写成<code>@import "mixin"</code>。</p>
+<p><strong>被导入sass文件a.scss：</strong></p>
+<pre><code class="scss"><span class="comment">//a.scss</span>
+<span class="comment">//-------------------------------</span>
+<span class="tag">body</span> {
+  <span class="attribute">background</span><span class="value">: <span class="hexcolor">#eee</span>;</span>
+}
+</code></pre>
+
+<p><strong>需要导入样式的sass文件b.scss：</strong></p>
+<pre><code class="css"><span class="at_rule">@<span class="keyword">import</span> <span class="string">"reset.css"</span></span>;
+<span class="at_rule">@<span class="keyword">import</span> <span class="string">"a"</span></span>;
+<span class="tag">p</span><span class="rules">{
+  <span class="rule"><span class="attribute">background</span>:<span class="value"> <span class="hexcolor">#0982c1</span></span></span>;
+<span class="rule">}</span></span> 
+</code></pre>
+
+<p><strong>转译出来的b.css样式：</strong></p>
+<pre><code class="css"><span class="at_rule">@<span class="keyword">import</span> <span class="string">"reset.css"</span></span>;
+<span class="tag">body</span> <span class="rules">{
+  <span class="rule"><span class="attribute">background</span>:<span class="value"> <span class="hexcolor">#eee</span></span></span>;
+<span class="rule">}</span></span>
+<span class="tag">p</span><span class="rules">{
+  <span class="rule"><span class="attribute">background</span>:<span class="value"> <span class="hexcolor">#0982c1</span></span></span>;
+<span class="rule">}</span></span>
+</code></pre>
+
+<p>根据上面的代码可以看出，b.scss编译后，reset.css继续保持import的方式，而a.scss则被整合进来了。</p>
+<h2>注释</h2>
+<p>sass有两种注释方式，一种是标准的css注释方式<code>/* */</code>，另一种则是<code>//</code>双斜杆形式的单行注释，不过这种单行注释不会被转译出来。</p>
+<h3>标准的css注释</h3>
+<pre><code class="css"><span class="comment">/*
+*我是css的标准注释
+*设置body内距
+*/</span>
+<span class="tag">body</span><span class="rules">{
+  <span class="rule"><span class="attribute">padding</span>:<span class="value"><span class="number">5</span>px</span></span>;
+<span class="rule">}</span></span> 
+</code></pre>
+
+<h3>双斜杆单行注释</h3>
+<p>单行注释跟JavaScript语言中的注释一样，使用又斜杠（<code>//</code>），但单行注释不会输入到CSS中。</p>
+<pre><code class="scss"><span class="comment">//我是双斜杠表示的单行注释</span>
+<span class="comment">//设置body内距</span>
+<span class="tag">body</span>{
+  <span class="attribute">padding</span><span class="value">:<span class="number">5</span>px;</span> <span class="comment">//5px</span>
+} 
+</code></pre>
+
+<h2>变量</h2>
+<p>sass的变量必须是$开头，后面紧跟变量名，而变量值和变量名之间就需要使用冒号(:)分隔开（就像CSS属性设置一样），如果值后面加上!default则表示默认值。</p>
+<h3>普通变量</h3>
+<p>定义之后可以在全局范围内使用。</p>
+<pre><code class="scss"><span class="comment">//sass style</span>
+<span class="comment">//-------------------------------</span>
+$fontSize<span class="value">: <span class="number">12</span>px;</span>
+<span class="tag">body</span>{
+    <span class="attribute">font-size</span><span class="value">:$fontSize;</span>
+}
+
+<span class="comment">//css style</span>
+<span class="comment">//-------------------------------</span>
+<span class="tag">body</span>{
+    <span class="attribute">font-size</span><span class="value">:<span class="number">12</span>px;</span>
+}
+</code></pre>
+
+<h3>默认变量</h3>
+<p>sass的默认变量仅需要在值后面加上<code>!default</code>即可。</p>
+<pre><code class="scss"><span class="comment">//sass style</span>
+<span class="comment">//-------------------------------</span>
+$baseLineHeight<span class="value">:        <span class="number">1.5</span> !default;</span>
+<span class="tag">body</span>{
+    <span class="attribute">line-height</span><span class="value">: $baseLineHeight;</span> 
+}
+
+<span class="comment">//css style</span>
+<span class="comment">//-------------------------------</span>
+<span class="tag">body</span>{
+    <span class="attribute">line-height</span><span class="value">:<span class="number">1.5</span>;</span>
+}
+</code></pre>
+
+<p>sass的默认变量一般是用来设置默认值，然后根据需求来覆盖的，覆盖的方式也很简单，只需要在默认变量之前重新声明下变量即可</p>
+<pre><code class="scss"><span class="comment">//sass style</span>
+<span class="comment">//-------------------------------</span>
+$baseLineHeight<span class="value">:        <span class="number">2</span>;</span>
+$baseLineHeight<span class="value">:        <span class="number">1.5</span> !default;</span>
+<span class="tag">body</span>{
+    <span class="attribute">line-height</span><span class="value">: $baseLineHeight;</span> 
+}
+
+<span class="comment">//css style</span>
+<span class="comment">//-------------------------------</span>
+<span class="tag">body</span>{
+    <span class="attribute">line-height</span><span class="value">:<span class="number">2</span>;</span>
+}
+</code></pre>
+
+<p>可以看出现在编译后的<code>line-height</code>为2，而不是我们默认的1.5。默认变量的价值在进行组件化开发的时候会非常有用。</p>
+<h3>特殊变量</h3>
+<p>一般我们定义的变量都为属性值，可直接使用，但是如果变量作为属性或在某些特殊情况下等则必须要以<code>#{$variables}</code>形式使用。</p>
+<pre><code class="scss"><span class="comment">//sass style</span>
+<span class="comment">//-------------------------------</span>
+$borderDirection<span class="value">:       top !default;</span> 
+$baseFontSize<span class="value">:          <span class="number">12</span>px !default;</span>
+$baseLineHeight<span class="value">:        <span class="number">1.5</span> !default;</span>
+
+<span class="comment">//应用于class和属性</span>
+<span class="class">.border-</span>#{$borderDirection}{
+  <span class="attribute">border</span>-#{$borderDirection}<span class="value">:<span class="number">1</span>px solid <span class="hexcolor">#ccc</span>;</span>
+}
+<span class="comment">//应用于复杂的属性值</span>
+<span class="tag">body</span>{
+    <span class="attribute">font</span><span class="value">:#{$baseFontSize}/#{$baseLineHeight};</span>
+}
+
+<span class="comment">//css style</span>
+<span class="comment">//-------------------------------</span>
+<span class="class">.border-top</span>{
+  <span class="attribute">border-top</span><span class="value">:<span class="number">1</span>px solid <span class="hexcolor">#ccc</span>;</span>
+}
+<span class="tag">body</span> {
+  <span class="attribute">font</span><span class="value">: <span class="number">12</span>px/<span class="number">1.5</span>;</span>
+}
+</code></pre>
+
+<h3>多值变量</h3>
+<p>多值变量分为list类型和map类型，简单来说list类型有点像js中的数组，而map类型有点像js中的对象。</p>
+<h4>list</h4>
+<p>list数据可通过空格，逗号或小括号分隔多个值，可用<code>nth($var,$index)</code>取值。关于list数据操作还有很多其他函数如<code>length($list)</code>，<code>join($list1,$list2,[$separator])</code>，<code>append($list,$value,[$separator])</code>等，具体可参考<a href="http://sass-lang.com/documentation/Sass/Script/Functions.html">sass Functions</a>（搜索<code>List Functions</code>即可）</p>
+<p><strong>定义</strong></p>
+<pre><code class="scss"><span class="comment">//一维数据</span>
+$px<span class="value">: <span class="number">5</span>px <span class="number">10</span>px <span class="number">20</span>px <span class="number">30</span>px;</span>
+
+<span class="comment">//二维数据，相当于js中的二维数组</span>
+$px<span class="value">: <span class="number">5</span>px <span class="number">10</span>px, <span class="number">20</span>px <span class="number">30</span>px;</span>
+$px<span class="value">: (<span class="number">5</span>px <span class="number">10</span>px) (<span class="number">20</span>px <span class="number">30</span>px);</span>
+</code></pre>
+
+<p><strong>使用</strong></p>
+<pre><code class="scss"><span class="comment">//sass style</span>
+<span class="comment">//-------------------------------</span>
+$linkColor<span class="value">:         <span class="hexcolor">#08c</span> <span class="hexcolor">#333</span> !default;</span><span class="comment">//第一个值为默认值，第二个鼠标滑过值</span>
+<span class="tag">a</span>{
+  <span class="attribute">color</span><span class="value">:nth($linkColor,<span class="number">1</span>);</span>
+
+  &amp;<span class="pseudo">:hover</span>{
+    <span class="attribute">color</span><span class="value">:nth($linkColor,<span class="number">2</span>);</span>
+  }
+}
+
+<span class="comment">//css style</span>
+<span class="comment">//-------------------------------</span>
+<span class="tag">a</span>{
+  <span class="attribute">color</span><span class="value">:<span class="hexcolor">#08c</span>;</span>
+}
+<span class="tag">a</span><span class="pseudo">:hover</span>{
+  <span class="attribute">color</span><span class="value">:<span class="hexcolor">#333</span>;</span>
+}
+</code></pre>
+
+<h4>map</h4>
+<p>map数据以key和value成对出现，其中value又可以是list。格式为：<code>$map: (key1: value1, key2: value2, key3: value3);</code>。可通过<code>map-get($map,$key)</code>取值。关于map数据还有很多其他函数如<code>map-merge($map1,$map2)</code>，<code>map-keys($map)</code>，<code>map-values($map)</code>等，具体可参考<a href="http://sass-lang.com/documentation/Sass/Script/Functions.html">sass Functions</a>（搜索<code>Map Functions</code>即可）</p>
+<p><strong>定义</strong></p>
+<pre><code class="scss">$heading<span class="value">: (h1: <span class="number">2</span>em, h2: <span class="number">1.5</span>em, h3: <span class="number">1.2</span>em);</span>
+</code></pre>
+
+<p><strong>使用</strong></p>
+<pre><code class="scss"><span class="comment">//sass style</span>
+<span class="comment">//-------------------------------</span>
+$headings<span class="value">: (h1: <span class="number">2</span>em, h2: <span class="number">1.5</span>em, h3: <span class="number">1.2</span>em);</span>
+<span class="at_rule">@<span class="keyword">each</span> $header, $size<span class="preprocessor"> in</span> $headings {</span>
+  #{$<span class="tag">header</span>} {
+    <span class="attribute">font-size</span><span class="value">: $size;</span>
+  }
+}
+
+<span class="comment">//css style</span>
+<span class="comment">//-------------------------------</span>
+<span class="tag">h1</span> {
+  <span class="attribute">font-size</span><span class="value">: <span class="number">2</span>em;</span> 
+}
+<span class="tag">h2</span> {
+  <span class="attribute">font-size</span><span class="value">: <span class="number">1.5</span>em;</span> 
+}
+<span class="tag">h3</span> {
+  <span class="attribute">font-size</span><span class="value">: <span class="number">1.2</span>em;</span> 
+}
+</code></pre>
+
+<h3>全局变量</h3>
+<p>在变量值后面加上<code>!global</code>即为全局变量。这个目前还用不上，不过将会在sass 3.4后的版本中正式应用。目前的sass变量范围饱受诟病，所以才有了这个全局变量。</p>
+<p><strong>目前变量机制</strong></p>
+<p>在选择器中声明的变量会覆盖外面全局声明的变量。(这也就人们常说的sass没有局部变量)</p>
+<pre><code class="scss"><span class="comment">//sass style</span>
+<span class="comment">//-------------------------------</span>
+$fontSize<span class="value">:      <span class="number">12</span>px;</span>
+<span class="tag">body</span>{
+    $fontSize<span class="value">: <span class="number">14</span>px;</span>        
+    <span class="attribute">font-size</span><span class="value">:$fontSize;</span>
+}
+<span class="tag">p</span>{
+    <span class="attribute">font-size</span><span class="value">:$fontSize;</span>
+}
+
+<span class="comment">//css style</span>
+<span class="comment">//-------------------------------</span>
+<span class="tag">body</span>{
+    <span class="attribute">font-size</span><span class="value">:<span class="number">14</span>px;</span>
+}
+<span class="tag">p</span>{
+    <span class="attribute">font-size</span><span class="value">:<span class="number">14</span>px;</span>
+}
+</code></pre>
+
+<p><strong>启用global之后的机制</strong></p>
+<p>请注意，这个目前还无法使用，所以样式不是真实解析出来的。</p>
+<pre><code class="scss"><span class="comment">//sass style</span>
+<span class="comment">//-------------------------------</span>
+$fontSize<span class="value">:      <span class="number">12</span>px;</span>
+$<span class="attribute">color</span><span class="value">:         <span class="hexcolor">#333</span>;</span>
+<span class="tag">body</span>{
+    $fontSize<span class="value">: <span class="number">14</span>px;</span>        
+    $<span class="attribute">color</span>：   <span class="id">#fff</span> !global;
+    <span class="attribute">font-size</span><span class="value">:$fontSize;</span>
+    <span class="attribute">color</span><span class="value">:$color;</span>
+}
+<span class="tag">p</span>{
+    <span class="attribute">font-size</span><span class="value">:$fontSize;</span>
+    <span class="attribute">color</span><span class="value">:$color;</span>
+}
+
+<span class="comment">//css style</span>
+<span class="comment">//-------------------------------</span>
+<span class="tag">body</span>{
+    <span class="attribute">font-size</span><span class="value">:<span class="number">14</span>px;</span>
+    <span class="attribute">color</span><span class="value">:<span class="hexcolor">#fff</span>;</span>
+}
+<span class="tag">p</span>{
+    <span class="attribute">font-size</span><span class="value">:<span class="number">12</span>px;</span>
+    <span class="attribute">color</span><span class="value">:<span class="hexcolor">#fff</span>;</span>
+}
+</code></pre>
+
+<p>这里设置了两个变量，然后在body里面重新设置了下，有点不同的是对于<code>$color</code>变量，我们设置了<code>!global</code>。通过编译后的css可以看到<code>font-size</code>取值不同，而<code>color</code>取值相同。与上面的机制对比就会发现默认在选择器里面的变量为局部变量，而只有设置了<code>!global</code>之后才会成为全局变量。</p>
+<p>关于变量的详细分析请查阅<a href="http://www.w3cplus.com/preprocessor/sass-basic-variable.html">sass揭秘之变量</a></p>
+<h2>嵌套(Nesting)</h2>
+<p>sass的嵌套包括两种：一种是选择器的嵌套；另一种是属性的嵌套。我们一般说起或用到的都是选择器的嵌套。</p>
+<h3>选择器嵌套</h3>
+<p>所谓选择器嵌套指的是在一个选择器中嵌套另一个选择器来实现继承，从而增强了sass文件的结构性和可读性。</p>
+<p>在选择器嵌套中，可以使用<code>&amp;</code>表示父元素选择器</p>
+<pre><code class="scss"><span class="comment">//sass style</span>
+<span class="comment">//-------------------------------</span>
+<span class="id">#top_nav</span>{
+  <span class="attribute">line-height</span><span class="value">: <span class="number">40</span>px;</span>
+  <span class="attribute">text-transform</span><span class="value">: capitalize;</span>
+  <span class="attribute">background-color</span><span class="value">:<span class="hexcolor">#333</span>;</span>
+  <span class="tag">li</span>{
+    <span class="attribute">float</span><span class="pseudo">:left</span>;
+  }
+  <span class="tag">a</span>{
+    <span class="attribute">display</span><span class="value">: block;</span>
+    <span class="attribute">padding</span><span class="value">: <span class="number">0</span> <span class="number">10</span>px;</span>
+    <span class="attribute">color</span><span class="value">: <span class="hexcolor">#fff</span>;</span>
+
+    &amp;<span class="pseudo">:hover</span>{
+      <span class="attribute">color</span><span class="value">:<span class="hexcolor">#ddd</span>;</span>
+    }
+  }
+}
+
+<span class="comment">//css style</span>
+<span class="comment">//-------------------------------</span>
+<span class="id">#top_nav</span>{
+  <span class="attribute">line-height</span><span class="value">: <span class="number">40</span>px;</span>
+  <span class="attribute">text-transform</span><span class="value">: capitalize;</span>
+  <span class="attribute">background-color</span><span class="value">:<span class="hexcolor">#333</span>;</span>
+}  
+<span class="id">#top_nav</span> <span class="tag">li</span>{
+  <span class="attribute">float</span><span class="pseudo">:left</span>;
+}
+<span class="id">#top_nav</span> <span class="tag">a</span>{
+  <span class="attribute">display</span><span class="value">: block;</span>
+  <span class="attribute">padding</span><span class="value">: <span class="number">0</span> <span class="number">10</span>px;</span>
+  <span class="attribute">color</span><span class="value">: <span class="hexcolor">#fff</span>;</span>
+}
+<span class="id">#top_nav</span> <span class="tag">a</span><span class="pseudo">:hover</span>{
+  <span class="attribute">color</span><span class="value">:<span class="hexcolor">#ddd</span>;</span>
+}
+</code></pre>
+
+<h3>属性嵌套</h3>
+<p>所谓属性嵌套指的是有些属性拥有同一个开始单词，如border-width，border-color都是以border开头。拿个官网的实例看下：</p>
+<pre><code class="scss"><span class="comment">//sass style</span>
+<span class="comment">//-------------------------------</span>
+<span class="class">.fakeshadow</span> {
+  <span class="attribute">border</span><span class="value">: {
+    style: solid;</span>
+    <span class="attribute">left</span><span class="value">: {
+      width: <span class="number">4</span>px;</span>
+      <span class="attribute">color</span><span class="value">: <span class="hexcolor">#888</span>;</span>
+    }
+    <span class="attribute">right</span><span class="value">: {
+      width: <span class="number">2</span>px;</span>
+      <span class="attribute">color</span><span class="value">: <span class="hexcolor">#ccc</span>;</span>
+    }
+  }
+}
+
+<span class="comment">//css style</span>
+<span class="comment">//-------------------------------</span>
+<span class="class">.fakeshadow</span> {
+  <span class="attribute">border-style</span><span class="value">: solid;</span>
+  <span class="attribute">border-left-width</span><span class="value">: <span class="number">4</span>px;</span>
+  <span class="attribute">border-left-color</span><span class="value">: <span class="hexcolor">#888</span>;</span>
+  <span class="attribute">border-right-width</span><span class="value">: <span class="number">2</span>px;</span>
+  <span class="attribute">border-right-color</span><span class="value">: <span class="hexcolor">#ccc</span>;</span> 
+}
+</code></pre>
+
+<p>当然这只是个属性嵌套的例子，如果实际这样使用，那估计得疯掉。</p>
+<h2>@at-root</h2>
+<p>sass3.3.0中新增的功能，用来跳出选择器嵌套的。默认所有的嵌套，继承所有上级选择器，但有了这个就可以跳出所有上级选择器。</p>
+<p><strong>普通跳出嵌套</strong></p>
+<pre><code class="scss"><span class="comment">//sass style</span>
+<span class="comment">//-------------------------------</span>
+<span class="comment">//没有跳出</span>
+<span class="class">.parent-1</span> {
+  <span class="attribute">color</span><span class="value">:<span class="hexcolor">#f00</span>;</span>
+  <span class="class">.child</span> {
+    <span class="attribute">width</span><span class="value">:<span class="number">100</span>px;</span>
+  }
+}
+
+<span class="comment">//单个选择器跳出</span>
+<span class="class">.parent-2</span> {
+  <span class="attribute">color</span><span class="value">:<span class="hexcolor">#f00</span>;</span>
+  <span class="at_rule">@at-root<span class="preprocessor"> .child</span> {</span>
+    <span class="attribute">width</span><span class="value">:<span class="number">200</span>px;</span>
+  }
+}
+
+<span class="comment">//多个选择器跳出</span>
+<span class="class">.parent-3</span> {
+  <span class="attribute">background</span><span class="value">:<span class="hexcolor">#f00</span>;</span>
+  <span class="at_rule">@at-root {</span>
+    <span class="class">.child1</span> {
+      <span class="attribute">width</span><span class="value">:<span class="number">300</span>px;</span>
+    }
+    <span class="class">.child2</span> {
+      <span class="attribute">width</span><span class="value">:<span class="number">400</span>px;</span>
+    }
+  }
+}
+
+<span class="comment">//css style</span>
+<span class="comment">//-------------------------------</span>
+<span class="class">.parent-1</span> {
+  <span class="attribute">color</span><span class="value">: <span class="hexcolor">#f00</span>;</span>
+}
+<span class="class">.parent-1</span> <span class="class">.child</span> {
+  <span class="attribute">width</span><span class="value">: <span class="number">100</span>px;</span>
+}
+
+<span class="class">.parent-2</span> {
+  <span class="attribute">color</span><span class="value">: <span class="hexcolor">#f00</span>;</span>
+}
+<span class="class">.child</span> {
+  <span class="attribute">width</span><span class="value">: <span class="number">200</span>px;</span>
+}
+
+<span class="class">.parent-3</span> {
+  <span class="attribute">background</span><span class="value">: <span class="hexcolor">#f00</span>;</span>
+}
+<span class="class">.child1</span> {
+  <span class="attribute">width</span><span class="value">: <span class="number">300</span>px;</span>
+}
+<span class="class">.child2</span> {
+  <span class="attribute">width</span><span class="value">: <span class="number">400</span>px;</span>
+}
+</code></pre>
+
+<p><strong><code>@at-root (without: ...)</code>和<code>@at-root (with: ...)</code></strong></p>
+<p>默认<code>@at-root</code>只会跳出选择器嵌套，而不能跳出<code>@media</code>或<code>@support</code>，如果要跳出这两种，则需使用<code>@at-root (without: media)</code>，<code>@at-root (without: support)</code>。这个语法的关键词有四个：<code>all</code>（表示所有），<code>rule</code>（表示常规css），<code>media</code>（表示media），<code>support</code>（表示support，因为<code>@support</code>目前还无法广泛使用，所以在此不表）。我们默认的<code>@at-root</code>其实就是<code>@at-root (without:rule)</code>。</p>
+<pre><code class="scss"><span class="comment">//sass style</span>
+<span class="comment">//-------------------------------</span>
+<span class="comment">//跳出父级元素嵌套</span>
+<span class="at_rule">@<span class="keyword">media</span><span class="preprocessor"> print</span> {</span>
+    <span class="class">.parent1</span>{
+      <span class="attribute">color</span><span class="value">:<span class="hexcolor">#f00</span>;</span>
+      <span class="at_rule">@at-root<span class="preprocessor"> .child1</span> {</span>
+        <span class="attribute">width</span><span class="value">:<span class="number">200</span>px;</span>
+      }
+    }
+}
+
+<span class="comment">//跳出media嵌套，父级有效</span>
+<span class="at_rule">@<span class="keyword">media</span><span class="preprocessor"> print</span> {</span>
+  <span class="class">.parent2</span>{
+    <span class="attribute">color</span><span class="value">:<span class="hexcolor">#f00</span>;</span>
+
+    <span class="at_rule">@at-root (without:<span class="preprocessor"> media</span>) {</span>
+      <span class="class">.child2</span> {
+        <span class="attribute">width</span><span class="value">:<span class="number">200</span>px;</span>
+      } 
+    }
+  }
+}
+
+<span class="comment">//跳出media和父级</span>
+<span class="at_rule">@<span class="keyword">media</span><span class="preprocessor"> print</span> {</span>
+  <span class="class">.parent3</span>{
+    <span class="attribute">color</span><span class="value">:<span class="hexcolor">#f00</span>;</span>
+
+    <span class="at_rule">@at-root (without:<span class="preprocessor"> all</span>) {</span>
+      <span class="class">.child3</span> {
+        <span class="attribute">width</span><span class="value">:<span class="number">200</span>px;</span>
+      } 
+    }
+  }
+}
+
+<span class="comment">//sass style</span>
+<span class="comment">//-------------------------------</span>
+<span class="at_rule">@<span class="keyword">media</span><span class="preprocessor"> print</span> {</span>
+  <span class="class">.parent1</span> {
+    <span class="attribute">color</span><span class="value">: <span class="hexcolor">#f00</span>;</span>
+  }
+  <span class="class">.child1</span> {
+    <span class="attribute">width</span><span class="value">: <span class="number">200</span>px;</span>
+  }
+}
+
+<span class="at_rule">@<span class="keyword">media</span><span class="preprocessor"> print</span> {</span>
+  <span class="class">.parent2</span> {
+    <span class="attribute">color</span><span class="value">: <span class="hexcolor">#f00</span>;</span>
+  }
+}
+<span class="class">.parent2</span> <span class="class">.child2</span> {
+  <span class="attribute">width</span><span class="value">: <span class="number">200</span>px;</span>
+}
+
+<span class="at_rule">@<span class="keyword">media</span><span class="preprocessor"> print</span> {</span>
+  <span class="class">.parent3</span> {
+    <span class="attribute">color</span><span class="value">: <span class="hexcolor">#f00</span>;</span>
+  }
+}
+<span class="class">.child3</span> {
+  <span class="attribute">width</span><span class="value">: <span class="number">200</span>px;</span>
+}
+</code></pre>
+
+<p><strong><code>@at-root</code>与<code>&amp;</code>配合使用</strong></p>
+<pre><code class="scss"><span class="comment">//sass style</span>
+<span class="comment">//-------------------------------</span>
+<span class="class">.child</span>{
+    <span class="at_rule">@at-root<span class="preprocessor"> .parent</span> &amp;{</span>
+        <span class="attribute">color</span><span class="value">:<span class="hexcolor">#f00</span>;</span>
+    }
+}
+
+<span class="comment">//css style</span>
+<span class="comment">//-------------------------------</span>
+<span class="class">.parent</span> <span class="class">.child</span> {
+  <span class="attribute">color</span><span class="value">: <span class="hexcolor">#f00</span>;</span>
+}
+</code></pre>
+
+<p><strong>应用于@keyframe</strong></p>
+<pre><code class="scss"><span class="comment">//sass style</span>
+<span class="comment">//-------------------------------</span>
+<span class="class">.demo</span> {
+    ...
+    <span class="attribute">animation</span><span class="value">: motion <span class="number">3</span>s infinite;</span>
+
+    <span class="at_rule">@at-root {</span>
+        <span class="at_rule">@keyframes<span class="preprocessor"> motion</span> {</span>
+          ...
+        }
+    }
+}
+
+<span class="comment">//css style</span>
+<span class="comment">//-------------------------------   </span>
+<span class="class">.demo</span> {
+    ...   
+    <span class="attribute">animation</span><span class="value">: motion <span class="number">3</span>s infinite;</span>
+}
+<span class="at_rule">@keyframes<span class="preprocessor"> motion</span> {</span>
+    ...
+}
+</code></pre>
+
+<h2>混合(mixin)</h2>
+<p>sass中使用<code>@mixin</code>声明混合，可以传递参数，参数名以$符号开始，多个参数以逗号分开，也可以给参数设置默认值。声明的<code>@mixin</code>通过<code>@include</code>来调用。</p>
+<p><strong>无参数mixin</strong></p>
+<pre><code class="scss"><span class="comment">//sass style</span>
+<span class="comment">//-------------------------------</span>
+<span class="at_rule">@<span class="keyword">mixin</span><span class="preprocessor"> center-block</span> {</span>
+    <span class="attribute">margin-left</span><span class="value">:auto;</span>
+    <span class="attribute">margin-right</span><span class="value">:auto;</span>
+}
+<span class="class">.demo</span>{
+    <span class="at_rule">@<span class="keyword">include</span><span class="preprocessor"> center-block</span>;</span>
+}
+
+<span class="comment">//css style</span>
+<span class="comment">//-------------------------------</span>
+<span class="class">.demo</span>{
+    <span class="attribute">margin-left</span><span class="value">:auto;</span>
+    <span class="attribute">margin-right</span><span class="value">:auto;</span>
+}
+</code></pre>
+
+<p><strong>有参数mixin</strong></p>
+<pre><code class="scss"><span class="comment">//sass style</span>
+<span class="comment">//-------------------------------   </span>
+<span class="at_rule">@<span class="keyword">mixin</span><span class="preprocessor"> opacity</span>($opacity:<span class="number">50</span>) {</span>
+  <span class="attribute">opacity</span><span class="value">: $opacity / <span class="number">100</span>;</span>
+  <span class="attribute">filter</span><span class="value">: alpha(opacity=$opacity);</span>
+}
+
+<span class="comment">//css style</span>
+<span class="comment">//-------------------------------</span>
+<span class="class">.opacity</span>{
+  <span class="at_rule">@<span class="keyword">include</span><span class="preprocessor"> opacity</span>;</span> <span class="comment">//参数使用默认值</span>
+}
+<span class="class">.opacity-80</span>{
+  <span class="at_rule">@<span class="keyword">include</span><span class="preprocessor"> opacity</span>(<span class="number">80</span>);</span> <span class="comment">//传递参数</span>
+}
+</code></pre>
+
+<p><strong>多个参数mixin</strong></p>
+<p>调用时可直接传入值，如<code>@include</code>传入参数的个数小于<code>@mixin</code>定义参数的个数，则按照顺序表示，后面不足的使用默认值，如不足的没有默认值则报错。除此之外还可以选择性的传入参数，使用参数名与值同时传入。</p>
+<pre><code class="scss"><span class="comment">//sass style</span>
+<span class="comment">//-------------------------------   </span>
+<span class="at_rule">@<span class="keyword">mixin</span><span class="preprocessor"> horizontal-line</span>($border:<span class="number">1</span>px<span class="preprocessor"> dashed</span> <span class="hexcolor">#ccc</span>, $padding:<span class="number">10</span>px){</span>
+    <span class="attribute">border-bottom</span><span class="value">:$border;</span>
+    <span class="attribute">padding-top</span><span class="value">:$padding;</span>
+    <span class="attribute">padding-bottom</span><span class="value">:$padding;</span>  
+}
+<span class="class">.imgtext-h</span> <span class="tag">li</span>{
+    <span class="at_rule">@<span class="keyword">include</span><span class="preprocessor"> horizontal-line</span>(<span class="number">1</span>px<span class="preprocessor"> solid</span> <span class="hexcolor">#ccc</span>);</span>
+}
+<span class="class">.imgtext-h--product</span> <span class="tag">li</span>{
+    <span class="at_rule">@<span class="keyword">include</span><span class="preprocessor"> horizontal-line</span>($padding:<span class="number">15</span>px);</span>
+}
+
+<span class="comment">//css style</span>
+<span class="comment">//-------------------------------</span>
+<span class="class">.imgtext-h</span> <span class="tag">li</span> {
+    <span class="attribute">border-bottom</span><span class="value">: <span class="number">1</span>px solid <span class="hexcolor">#cccccc</span>;</span>
+    <span class="attribute">padding-top</span><span class="value">: <span class="number">10</span>px;</span>
+    <span class="attribute">padding-bottom</span><span class="value">: <span class="number">10</span>px;</span>
+}
+<span class="class">.imgtext-h--product</span> <span class="tag">li</span> {
+    <span class="attribute">border-bottom</span><span class="value">: <span class="number">1</span>px dashed <span class="hexcolor">#cccccc</span>;</span>
+    <span class="attribute">padding-top</span><span class="value">: <span class="number">15</span>px;</span>
+    <span class="attribute">padding-bottom</span><span class="value">: <span class="number">15</span>px;</span>
+}
+</code></pre>
+
+<p><strong>多组值参数mixin</strong></p>
+<p>如果一个参数可以有多组值，如box-shadow、transition等，那么参数则需要在变量后加三个点表示，如<code>$variables...</code>。</p>
+<pre><code class="scss"><span class="comment">//sass style</span>
+<span class="comment">//-------------------------------   </span>
+<span class="comment">//box-shadow可以有多组值，所以在变量参数后面添加...</span>
+<span class="at_rule">@<span class="keyword">mixin</span><span class="preprocessor"> box-shadow</span>($shadow...) {</span>
+  -webkit-<span class="attribute">box-shadow</span><span class="value">:$shadow;</span>
+  <span class="attribute">box-shadow</span><span class="value">:$shadow;</span>
+}
+<span class="class">.box</span>{
+  <span class="attribute">border</span><span class="value">:<span class="number">1</span>px solid <span class="hexcolor">#ccc</span>;</span>
+  <span class="at_rule">@<span class="keyword">include</span><span class="preprocessor"> box-shadow</span>(<span class="number">0</span><span class="preprocessor"> 2px</span><span class="preprocessor"> 2px</span><span class="preprocessor"> rgba</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,.<span class="number">3</span>),<span class="number">0</span><span class="preprocessor"> 3px</span><span class="preprocessor"> 3px</span><span class="preprocessor"> rgba</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,.<span class="number">3</span>),<span class="number">0</span><span class="preprocessor"> 4px</span><span class="preprocessor"> 4px</span><span class="preprocessor"> rgba</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,.<span class="number">3</span>));</span>
+}
+
+<span class="comment">//css style</span>
+<span class="comment">//-------------------------------</span>
+<span class="class">.box</span>{
+  <span class="attribute">border</span><span class="value">:<span class="number">1</span>px solid <span class="hexcolor">#ccc</span>;</span>
+  -webkit-<span class="attribute">box-shadow</span><span class="value">:<span class="number">0</span> <span class="number">2</span>px <span class="number">2</span>px rgba(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,.<span class="number">3</span>),<span class="number">0</span> <span class="number">3</span>px <span class="number">3</span>px rgba(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,.<span class="number">3</span>),<span class="number">0</span> <span class="number">4</span>px <span class="number">4</span>px rgba(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,.<span class="number">3</span>);</span>
+  <span class="attribute">box-shadow</span><span class="value">:<span class="number">0</span> <span class="number">2</span>px <span class="number">2</span>px rgba(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,.<span class="number">3</span>),<span class="number">0</span> <span class="number">3</span>px <span class="number">3</span>px rgba(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,.<span class="number">3</span>),<span class="number">0</span> <span class="number">4</span>px <span class="number">4</span>px rgba(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,.<span class="number">3</span>);</span>
+}
+</code></pre>
+
+<h3>@content</h3>
+<p><code>@content</code>在sass3.2.0中引入，可以用来解决css3的@media等带来的问题。它可以使<code>@mixin</code>接受一整块样式，接受的样式从@content开始。</p>
+<pre><code class="scss"> <span class="comment">//sass style</span>
+<span class="comment">//-------------------------------                     </span>
+<span class="at_rule">@<span class="keyword">mixin</span><span class="preprocessor"> max-screen</span>($res){</span>
+  <span class="at_rule">@<span class="keyword">media</span><span class="preprocessor"> only</span><span class="preprocessor"> screen</span><span class="preprocessor"> and</span> (<span class="preprocessor"> max-width</span>: $res )
+  {</span>
+    <span class="at_rule">@<span class="keyword">content</span>;</span>
+  }
+}
+
+<span class="at_rule">@<span class="keyword">include</span><span class="preprocessor"> max-screen</span>(<span class="number">480</span>px) {</span>
+  <span class="tag">body</span> { <span class="attribute">color</span><span class="value">: red }
+}
+
+//css style
+//-------------------------------
+@media only screen and (max-width: <span class="number">480</span>px) {
+  body { color: red }
+}                     
+</span></code></pre>
+
+<p>PS：<code>@mixin</code>通过<code>@include</code>调用后解析出来的样式是以拷贝形式存在的，而下面的继承则是以联合声明的方式存在的，所以从3.2.0版本以后，建议传递参数的用<code>@mixin</code>，而非传递参数类的使用下面的继承<code>%</code>。</p>
+<h2>继承</h2>
+<p>sass中，选择器继承可以让选择器继承另一个选择器的所有样式，并联合声明。使用选择器的继承，要使用关键词<code>@extend</code>，后面紧跟需要继承的选择器。</p>
+<pre><code class="scss"><span class="comment">//sass style</span>
+<span class="comment">//-------------------------------</span>
+<span class="tag">h1</span>{
+  <span class="attribute">border</span><span class="value">: <span class="number">4</span>px solid <span class="hexcolor">#ff9aa9</span>;</span>
+}
+<span class="class">.speaker</span>{
+  <span class="at_rule">@<span class="keyword">extend</span><span class="preprocessor"> h1</span>;</span>
+  <span class="attribute">border-width</span><span class="value">: <span class="number">2</span>px;</span>
+}
+
+<span class="comment">//css style</span>
+<span class="comment">//-------------------------------</span>
+<span class="tag">h1</span>,<span class="class">.speaker</span>{
+  <span class="attribute">border</span><span class="value">: <span class="number">4</span>px solid <span class="hexcolor">#ff9aa9</span>;</span>
+}
+<span class="class">.speaker</span>{
+  <span class="attribute">border-width</span><span class="value">: <span class="number">2</span>px;</span>
+}
+</code></pre>
+
+<h3>占位选择器<code>%</code></h3>
+<p>从sass 3.2.0以后就可以定义占位选择器<code>%</code>。这种选择器的优势在于：如果不调用则不会有任何多余的css文件，避免了以前在一些基础的文件中预定义了很多基础的样式，然后实际应用中不管是否使用了<code>@extend</code>去继承相应的样式，都会解析出来所有的样式。占位选择器以<code>%</code>标识定义，通过<code>@extend</code>调用。</p>
+<pre><code class="scss"><span class="comment">//sass style</span>
+<span class="comment">//-------------------------------</span>
+%ir{
+  <span class="attribute">color</span><span class="value">: transparent;</span>
+  <span class="attribute">text-shadow</span><span class="value">: none;</span>
+  <span class="attribute">background-color</span><span class="value">: transparent;</span>
+  <span class="attribute">border</span><span class="value">: <span class="number">0</span>;</span>
+}
+%clearfix{
+  <span class="at_rule">@<span class="keyword">if</span> $lte7 {</span>
+    *zoom<span class="value">: <span class="number">1</span>;</span>
+  }
+  &amp;<span class="pseudo">:before</span>,
+  &amp;<span class="pseudo">:after</span> {
+    <span class="attribute">content</span><span class="value">: <span class="string">""</span>;</span>
+    <span class="attribute">display</span><span class="value">: table;</span>
+    <span class="attribute">font</span><span class="value">: <span class="number">0</span>/<span class="number">0</span> a;</span>
+  }
+  &amp;<span class="pseudo">:after</span> {
+    <span class="attribute">clear</span><span class="value">: both;</span>
+  }
+}
+<span class="id">#header</span>{
+  <span class="tag">h1</span>{
+    <span class="at_rule">@<span class="keyword">extend</span> %ir;</span>
+    <span class="attribute">width</span><span class="value">:<span class="number">300</span>px;</span>
+  }
+}
+<span class="class">.ir</span>{
+  <span class="at_rule">@<span class="keyword">extend</span> %ir;</span>
+}
+
+<span class="comment">//css style</span>
+<span class="comment">//-------------------------------</span>
+<span class="id">#header</span> <span class="tag">h1</span>,
+<span class="class">.ir</span>{
+  <span class="attribute">color</span><span class="value">: transparent;</span>
+  <span class="attribute">text-shadow</span><span class="value">: none;</span>
+  <span class="attribute">background-color</span><span class="value">: transparent;</span>
+  <span class="attribute">border</span><span class="value">: <span class="number">0</span>;</span>
+}
+<span class="id">#header</span> <span class="tag">h1</span>{
+  <span class="attribute">width</span><span class="value">:<span class="number">300</span>px;</span>
+}
+</code></pre>
+
+<p>如上代码，定义了两个占位选择器<code>%ir</code>和<code>%clearfix</code>，其中<code>%clearfix</code>这个没有调用，所以解析出来的css样式也就没有clearfix部分。占位选择器的出现，使css文件更加简练可控，没有多余。所以可以用其定义一些基础的样式文件，然后根据需要调用产生相应的css。</p>
+<p><strong>ps</strong>：在<code>@media</code>中暂时不能<code>@extend</code> <code>@media</code>外的代码片段，以后将会可以。</p>
+<h2>函数</h2>
+<p>sass定义了很多函数可供使用，当然你也可以自己定义函数，以@fuction开始。sass的官方函数链接为：<a href="http://sass-lang.com/documentation/Sass/Script/Functions.html">sass fuction</a>，实际项目中我们使用最多的应该是颜色函数，而颜色函数中又以lighten减淡和darken加深为最，其调用方法为<code>lighten($color,$amount)</code>和<code>darken($color,$amount)</code>，它们的第一个参数都是颜色值，第二个参数都是百分比。</p>
+<pre><code class="scss"><span class="comment">//sass style</span>
+<span class="comment">//-------------------------------                     </span>
+$baseFontSize<span class="value">:      <span class="number">10</span>px !default;</span>
+$gray<span class="value">:              <span class="hexcolor">#ccc</span> !defualt;</span>        
+
+<span class="comment">// pixels to rems </span>
+<span class="at_rule">@function<span class="preprocessor"> pxToRem</span>($px) {</span>
+  <span class="at_rule">@return $px / $baseFontSize *<span class="preprocessor"> 1rem</span>;</span>
+}
+
+<span class="tag">body</span>{
+  <span class="attribute">font-size</span><span class="value">:$baseFontSize;</span>
+  <span class="attribute">color</span><span class="value">:lighten($gray,<span class="number">10</span>%);</span>
+}
+<span class="class">.test</span>{
+  <span class="attribute">font-size</span><span class="value">:pxToRem(<span class="number">16</span>px);</span>
+  <span class="attribute">color</span><span class="value">:darken($gray,<span class="number">10</span>%);</span>
+}
+
+<span class="comment">//css style</span>
+<span class="comment">//-------------------------------</span>
+<span class="tag">body</span>{
+  <span class="attribute">font-size</span><span class="value">:<span class="number">10</span>px;</span>
+  <span class="attribute">color</span><span class="value">:<span class="hexcolor">#E6E6E6</span>;</span>
+}
+<span class="class">.test</span>{
+  <span class="attribute">font-size</span><span class="value">:<span class="number">1.6</span>rem;</span>
+  <span class="attribute">color</span><span class="value">:<span class="hexcolor">#B3B3B3</span>;</span>
+}
+</code></pre>
+
+<p>关于<code>@mixin</code>，<code>%</code>，<code>@function</code>更多说明可参阅：</p>
+<ul>
+<li><a href="http://www.w3cplus.com/preprocessor/sass-mixins-function-placeholder.html">sass揭秘之@mixin，%，@function</a></li>
+<li><a href="http://www.w3cplus.com/preprocessor/sass-color-function.html">Sass基础——颜色函数</a></li>
+<li><a href="http://www.w3cplus.com/preprocessor/sass-other-function.html">Sass基础——Sass函数</a></li>
+</ul>
+<h2>运算</h2>
+<p>sass具有运算的特性，可以对数值型的Value(如：数字、颜色、变量等)进行加减乘除四则运算。请注意运算符前后请留一个空格，不然会出错。</p>
+<pre><code class="scss">$baseFontSize<span class="value">:          <span class="number">14</span>px !default;</span>
+$baseLineHeight<span class="value">:        <span class="number">1.5</span> !default;</span>
+$baseGap<span class="value">:               $baseFontSize * $baseLineHeight !default;</span>
+$halfBaseGap<span class="value">:           $baseGap / <span class="number">2</span>  !default;</span>
+$samllFontSize<span class="value">:         $baseFontSize - <span class="number">2</span>px  !default;</span>
+
+<span class="comment">//grid </span>
+$_columns<span class="value">:                     <span class="number">12</span> !default;</span>      <span class="comment">// Total number of columns</span>
+$_column-<span class="attribute">width</span><span class="value">:                <span class="number">60</span>px !default;</span>   <span class="comment">// Width of a single column</span>
+$_gutter<span class="value">:                      <span class="number">20</span>px !default;</span>     <span class="comment">// Width of the gutter</span>
+$_gridsystem-<span class="attribute">width</span><span class="value">:            $_columns * ($_column-width + $_gutter);</span> <span class="comment">//grid system width</span>
+</code></pre>
+
+<h2>条件判断及循环</h2>
+<h3>@if判断</h3>
+<p><code>@if</code>可一个条件单独使用，也可以和<code>@else</code>结合多条件使用</p>
+<pre><code class="scss"><span class="comment">//sass style</span>
+<span class="comment">//-------------------------------</span>
+$lte7<span class="value">: true;</span>
+$type<span class="value">: monster;</span>
+<span class="class">.ib</span>{
+    <span class="attribute">display</span><span class="value">:inline-block;</span>
+    <span class="at_rule">@<span class="keyword">if</span> $lte7 {</span>
+        *<span class="attribute">display</span><span class="value">:inline;</span>
+        *zoom<span class="value">:<span class="number">1</span>;</span>
+    }
+}
+<span class="tag">p</span> {
+  <span class="at_rule">@<span class="keyword">if</span> $type ==<span class="preprocessor"> ocean</span> {</span>
+    <span class="attribute">color</span><span class="value">: blue;</span>
+  } <span class="at_rule">@<span class="keyword">else</span><span class="preprocessor"> if</span> $type ==<span class="preprocessor"> matador</span> {</span>
+    <span class="attribute">color</span><span class="value">: red;</span>
+  } <span class="at_rule">@<span class="keyword">else</span><span class="preprocessor"> if</span> $type ==<span class="preprocessor"> monster</span> {</span>
+    <span class="attribute">color</span><span class="value">: green;</span>
+  } <span class="at_rule">@<span class="keyword">else</span> {</span>
+    <span class="attribute">color</span><span class="value">: black;</span>
+  }
+}
+
+<span class="comment">//css style</span>
+<span class="comment">//-------------------------------</span>
+<span class="class">.ib</span>{
+    <span class="attribute">display</span><span class="value">:inline-block;</span>
+    *<span class="attribute">display</span><span class="value">:inline;</span>
+    *zoom<span class="value">:<span class="number">1</span>;</span>
+}
+<span class="tag">p</span> {
+  <span class="attribute">color</span><span class="value">: green;</span> 
+}
+</code></pre>
+
+<h3>三目判断</h3>
+<p>语法为：<code>if($condition, $if_true, $if_false)</code> 。三个参数分别表示：条件，条件为真的值，条件为假的值。</p>
+<pre><code class="javascript"><span class="keyword">if</span>(<span class="literal">true</span>, <span class="number">1</span>px, <span class="number">2</span>px) =&gt; <span class="number">1</span>px
+<span class="keyword">if</span>(<span class="literal">false</span>, <span class="number">1</span>px, <span class="number">2</span>px) =&gt; <span class="number">2</span>px
+</code></pre>
+
+<h3>for循环</h3>
+<p>for循环有两种形式，分别为：<code>@for $var from &lt;start&gt; through &lt;end&gt;</code>和<code>@for $var from &lt;start&gt; to &lt;end&gt;</code>。$i表示变量，start表示起始值，end表示结束值，这两个的区别是关键字through表示包括end这个数，而to则不包括end这个数。</p>
+<pre><code class="scss"><span class="comment">//sass style</span>
+<span class="comment">//-------------------------------</span>
+<span class="at_rule">@<span class="keyword">for</span> $i<span class="preprocessor"> from</span><span class="preprocessor"> 1</span><span class="preprocessor"> through</span><span class="preprocessor"> 3</span> {</span>
+  <span class="class">.item-</span>#{$<span class="tag">i</span>} { <span class="attribute">width</span><span class="value">: <span class="number">2</span>em * $i;</span> }
+}
+
+<span class="comment">//css style</span>
+<span class="comment">//-------------------------------</span>
+<span class="class">.item-1</span> {
+  <span class="attribute">width</span><span class="value">: <span class="number">2</span>em;</span> 
+}
+<span class="class">.item-2</span> {
+  <span class="attribute">width</span><span class="value">: <span class="number">4</span>em;</span> 
+}
+<span class="class">.item-3</span> {
+  <span class="attribute">width</span><span class="value">: <span class="number">6</span>em;</span> 
+}
+</code></pre>
+
+<h3>@each循环</h3>
+<p>语法为：<code>@each $var in &lt;list or map&gt;</code>。其中<code>$var</code>表示变量，而list和map表示list类型数据和map类型数据。sass 3.3.0新加入了多字段循环和map数据循环。</p>
+<p><strong>单个字段list数据循环</strong></p>
+<pre><code class="scss"><span class="comment">//sass style</span>
+<span class="comment">//-------------------------------</span>
+$animal-list<span class="value">: puma, sea-slug, egret, salamander;</span>
+<span class="at_rule">@<span class="keyword">each</span> $animal<span class="preprocessor"> in</span> $animal-list {</span>
+  .#{$animal}-<span class="attribute">icon</span> {
+    <span class="attribute">background-image</span><span class="value">: url(<span class="string">'/images/#{$animal}.png'</span>);</span>
+  }
+}
+
+<span class="comment">//css style</span>
+<span class="comment">//-------------------------------</span>
+<span class="class">.puma-icon</span> {
+  <span class="attribute">background-image</span><span class="value">: url(<span class="string">'/images/puma.png'</span>);</span> 
+}
+<span class="class">.sea-slug-icon</span> {
+  <span class="attribute">background-image</span><span class="value">: url(<span class="string">'/images/sea-slug.png'</span>);</span> 
+}
+<span class="class">.egret-icon</span> {
+  <span class="attribute">background-image</span><span class="value">: url(<span class="string">'/images/egret.png'</span>);</span> 
+}
+<span class="class">.salamander-icon</span> {
+  <span class="attribute">background-image</span><span class="value">: url(<span class="string">'/images/salamander.png'</span>);</span> 
+}
+</code></pre>
+
+<p><strong>多个字段list数据循环</strong></p>
+<pre><code class="scss"><span class="comment">//sass style</span>
+<span class="comment">//-------------------------------</span>
+$animal-data<span class="value">: (puma, black, default),(sea-slug, blue, pointer),(egret, white, move);</span>
+<span class="at_rule">@<span class="keyword">each</span> $animal, $color, $cursor<span class="preprocessor"> in</span> $animal-data {</span>
+  .#{$animal}-<span class="attribute">icon</span> {
+    <span class="attribute">background-image</span><span class="value">: url(<span class="string">'/images/#{$animal}.png'</span>);</span>
+    <span class="attribute">border</span><span class="value">: <span class="number">2</span>px solid $color;</span>
+    <span class="attribute">cursor</span><span class="value">: $cursor;</span>
+  }
+}
+
+<span class="comment">//css style</span>
+<span class="comment">//-------------------------------</span>
+<span class="class">.puma-icon</span> {
+  <span class="attribute">background-image</span><span class="value">: url(<span class="string">'/images/puma.png'</span>);</span>
+  <span class="attribute">border</span><span class="value">: <span class="number">2</span>px solid black;</span>
+  <span class="attribute">cursor</span><span class="value">: default;</span> 
+}
+<span class="class">.sea-slug-icon</span> {
+  <span class="attribute">background-image</span><span class="value">: url(<span class="string">'/images/sea-slug.png'</span>);</span>
+  <span class="attribute">border</span><span class="value">: <span class="number">2</span>px solid blue;</span>
+  <span class="attribute">cursor</span><span class="value">: pointer;</span> 
+}
+<span class="class">.egret-icon</span> {
+  <span class="attribute">background-image</span><span class="value">: url(<span class="string">'/images/egret.png'</span>);</span>
+  <span class="attribute">border</span><span class="value">: <span class="number">2</span>px solid white;</span>
+  <span class="attribute">cursor</span><span class="value">: move;</span> 
+}
+</code></pre>
+
+<p><strong>多个字段map数据循环</strong></p>
+<pre><code class="scss"><span class="comment">//sass style</span>
+<span class="comment">//-------------------------------</span>
+$headings<span class="value">: (h1: <span class="number">2</span>em, h2: <span class="number">1.5</span>em, h3: <span class="number">1.2</span>em);</span>
+<span class="at_rule">@<span class="keyword">each</span> $header, $size<span class="preprocessor"> in</span> $headings {</span>
+  #{$<span class="tag">header</span>} {
+    <span class="attribute">font-size</span><span class="value">: $size;</span>
+  }
+}
+
+<span class="comment">//css style</span>
+<span class="comment">//-------------------------------</span>
+<span class="tag">h1</span> {
+  <span class="attribute">font-size</span><span class="value">: <span class="number">2</span>em;</span> 
+}
+<span class="tag">h2</span> {
+  <span class="attribute">font-size</span><span class="value">: <span class="number">1.5</span>em;</span> 
+}
+<span class="tag">h3</span> {
+  <span class="attribute">font-size</span><span class="value">: <span class="number">1.2</span>em;</span> 
+}
+</code></pre>
+
+<p>关于循环判断详细分析请查阅：<a href="http://www.w3cplus.com/preprocessor/sass-advanced-application.html">sass揭秘之@if，@for，@each</a></p>         
+</div>
+            </div><!--main-->
+        </div>
+    </div><!--wrap-container-->
+    <div id="footer">
+    <p>©版权所有<a href="http://w3cplus.com/" target="_blank">w3cplus</a><br>作者：<a href="http://weibo.com/marvin1023" target="_blank">结一</a><br>QQ群：78142855，1041263</p>
+</div></div> 
+<script type="text/javascript">
+  hljs.initHighlightingOnLoad();
+</script>
+
+</body></html>
